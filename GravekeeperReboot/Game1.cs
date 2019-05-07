@@ -1,18 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GravekeeperReboot.Scenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Nez;
 
 namespace GravekeeperReboot {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
 	public class Game1 : Nez.Core {
-		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		public Game1() {
-			Content.RootDirectory = "Content";
-		}
+		public Game1() : base(width: 1280, height: 768, isFullScreen: false, enableEntitySystems: false) { }
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -21,9 +20,8 @@ namespace GravekeeperReboot {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
-			// TODO: Add your initialization logic here
-
 			base.Initialize();
+			scene = new TestScene();
 		}
 
 		/// <summary>
