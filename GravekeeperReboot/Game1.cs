@@ -32,8 +32,8 @@ namespace GravekeeperReboot {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
-		}
+            playerTexture = content.Load<Texture2D>(Nez.Content.Sprites.player);
+        }
 
 		/// <summary>
 		/// UnloadContent will be called once per game and is the place to unload
@@ -63,10 +63,14 @@ namespace GravekeeperReboot {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+          
 
-			// TODO: Add your drawing code here
+            spriteBatch.Draw(playerTexture, new Rectangle(0, 0, 100, 100), Color.White);
 
-			base.Draw(gameTime);
+
+            spriteBatch.End();
+            base.Draw(gameTime);
 		}
 	}
 }
