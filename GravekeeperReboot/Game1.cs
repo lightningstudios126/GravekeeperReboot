@@ -7,7 +7,6 @@ namespace GravekeeperReboot {
 	/// This is the main type for your game.
 	/// </summary>
 	public class Game1 : Nez.Core {
-		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
 		public Game1() {
