@@ -11,7 +11,6 @@ namespace GravekeeperReboot {
 		SpriteBatch spriteBatch;
 
 		public Game1() {
-			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 		}
 
