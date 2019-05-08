@@ -1,20 +1,13 @@
 ﻿using Components;
 using Entities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Nez;
-using Systems;
-using Nez.Sprites;
 using Nez.Tiled;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Systems;
 
-namespace GravekeeperReboot.Scenes {
-    class TestScene : Scene {
-        Player player;
+namespace Scenes {
+	class TestScene : Scene {
+		Player player;
 		TiledMap testmap;
 
 		public override void initialize() {
