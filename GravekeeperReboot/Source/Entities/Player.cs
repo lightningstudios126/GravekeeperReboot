@@ -7,16 +7,18 @@ namespace Entities {
     public class Player{
         public Entity PlayerEntity { get;  private set; }
 
-        private Player() {}
+        private Player(Entity playerEntity) {
+			this.PlayerEntity = playerEntity;
+		}
 
         public static Player CreatePlayer (Scene scene) {
-            Player player = new Player();
-            player.PlayerEntity = scene.createEntity("Player");
-            player.PlayerEntity.setTag((int)Tags.Player);
-            player.PlayerEntity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)));
-            player.PlayerEntity.addComponent(new MoveComponent());
+			Entity player;
+            player = scene.createEntity("Player");
+            player.setTag((int)Tags.Player);
+            player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)));
+            player.addComponent(new MoveComponent());
 
-            return player;
+            return new Player(player);
         }
     }
 }
