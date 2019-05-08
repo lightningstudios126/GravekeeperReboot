@@ -1,17 +1,18 @@
-﻿using Nez;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Components;
+using Entities;
+using Nez;
+using Systems;
 
 namespace GravekeeperReboot.Scenes {
-	class TestScene : Scene {
-		public override void initialize() {
-			base.initialize();
-			Entity newEntity = createEntity("entityone");
-			addRenderer(new DefaultRenderer());
-		}
+    class TestScene : Scene {
+        Player player;
 
-	}
+        public override void initialize() {
+            base.initialize();
+            player = Player.CreatePlayer(this);
+            addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+
+            addRenderer(new DefaultRenderer());
+        }
+    }
 }

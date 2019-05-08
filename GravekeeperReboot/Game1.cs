@@ -1,8 +1,10 @@
 ﻿using GravekeeperReboot.Scenes;
+using Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Nez;
+using System;
 
 namespace GravekeeperReboot {
 	/// <summary>
@@ -11,7 +13,7 @@ namespace GravekeeperReboot {
 	public class Game1 : Nez.Core {
 		SpriteBatch spriteBatch;
 
-		public Game1() : base(width: 1280, height: 768, isFullScreen: false, enableEntitySystems: false) { }
+		public Game1() : base(width: 1280, height: 768, isFullScreen: false, enableEntitySystems: true) { }
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -31,8 +33,6 @@ namespace GravekeeperReboot {
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            playerTexture = content.Load<Texture2D>(Nez.Content.Sprites.player);
         }
 
 		/// <summary>
@@ -52,9 +52,10 @@ namespace GravekeeperReboot {
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
+            // TODO: Add your update logic here
+            InputHandler.Update();
 
-			base.Update(gameTime);
+            base.Update(gameTime);
 		}
 
 		/// <summary>
@@ -62,14 +63,6 @@ namespace GravekeeperReboot {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-          
-
-            spriteBatch.Draw(playerTexture, new Rectangle(0, 0, 100, 100), Color.White);
-
-
-            spriteBatch.End();
             base.Draw(gameTime);
 		}
 	}
