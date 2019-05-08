@@ -8,7 +8,7 @@ namespace GravekeeperReboot {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
-	public class Game1 : Nez.Core {
+	public class Game1 : Core {
 		SpriteBatch spriteBatch;
 
 		public Game1() : base(width: 1280, height: 768, isFullScreen: false, enableEntitySystems: false) { }
@@ -32,7 +32,6 @@ namespace GravekeeperReboot {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            playerTexture = content.Load<Texture2D>(Nez.Content.Sprites.player);
         }
 
 		/// <summary>
@@ -62,14 +61,7 @@ namespace GravekeeperReboot {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-          
-
-            spriteBatch.Draw(playerTexture, new Rectangle(0, 0, 100, 100), Color.White);
-
-
-            spriteBatch.End();
+			GraphicsDevice.Clear(Color.AntiqueWhite);
             base.Draw(gameTime);
 		}
 	}
