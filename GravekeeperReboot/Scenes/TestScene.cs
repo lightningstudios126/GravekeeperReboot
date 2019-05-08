@@ -15,24 +15,14 @@ using System.Threading.Tasks;
 namespace GravekeeperReboot.Scenes {
     class TestScene : Scene {
         Player player;
-
-        public override void initialize() {
-            base.initialize();
-            player = Player.CreatePlayer(this);
-            addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
-
-            addRenderer(new DefaultRenderer());
-        }
-    }
-	class TestScene : Scene {
-
 		TiledMap testmap;
 
 		public override void initialize() {
 			base.initialize();
-
 			this.addRenderer(new DefaultRenderer());
+			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 
+			player = Player.CreatePlayer(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
 		}
 
@@ -42,8 +32,6 @@ namespace GravekeeperReboot.Scenes {
 			Entity tileMapEntity = createEntity("tileMapEntity");
 			TiledMapComponent comp = tileMapEntity.addComponent(new TiledMapComponent(testmap));
 			tileMapEntity.position = new Vector2(100, 100);
-
-
 		}
 
 		public override void update() {

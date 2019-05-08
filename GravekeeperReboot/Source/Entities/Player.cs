@@ -13,7 +13,7 @@ namespace Entities {
             Player player = new Player();
             player.PlayerEntity = scene.createEntity("Player");
             player.PlayerEntity.setTag((int)Tags.Player);
-            player.PlayerEntity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.player)));
+            player.PlayerEntity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)));
             player.PlayerEntity.addComponent(new MoveComponent());
 
             return player;
