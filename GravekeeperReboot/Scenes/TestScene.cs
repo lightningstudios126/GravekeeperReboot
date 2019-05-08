@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Components;
+using Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Systems;
 using Nez.Sprites;
 using Nez.Tiled;
 using System;
@@ -10,6 +13,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GravekeeperReboot.Scenes {
+    class TestScene : Scene {
+        Player player;
+
+        public override void initialize() {
+            base.initialize();
+            player = Player.CreatePlayer(this);
+            addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+
+            addRenderer(new DefaultRenderer());
+        }
+    }
 	class TestScene : Scene {
 
 		TiledMap testmap;
