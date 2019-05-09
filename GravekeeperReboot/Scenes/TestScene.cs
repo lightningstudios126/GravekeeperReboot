@@ -17,7 +17,7 @@ namespace Scenes {
 		
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(this));
-			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))))
+			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 
 			player = Player.CreatePlayer(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
