@@ -1,5 +1,6 @@
 ﻿using Components;
 using Entities;
+using Input;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;
@@ -13,7 +14,10 @@ namespace Scenes {
 		public override void initialize() {
 			base.initialize();
 			this.addRenderer(new DefaultRenderer());
+
+			addEntityProcessor(new InputSystem());
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+			addEntityProcessor(new CommandSystem());
 
 			player = Player.CreatePlayer(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);

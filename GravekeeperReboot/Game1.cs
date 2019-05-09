@@ -1,10 +1,9 @@
-﻿using Scenes;
-using Input;
+﻿using Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Nez;
-using System;
+using Scenes;
 
 namespace GravekeeperReboot {
 	/// <summary>
@@ -54,7 +53,6 @@ namespace GravekeeperReboot {
 				Exit();
 
             // TODO: Add your update logic here
-            InputHandler.Update();
 
             base.Update(gameTime);
 		}

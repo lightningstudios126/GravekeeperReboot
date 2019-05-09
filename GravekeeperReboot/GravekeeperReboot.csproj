@@ -55,7 +55,8 @@
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
     <Compile Include="Source\Input\Command.cs" />
-    <Compile Include="Source\Input\InputHandler.cs" />
+    <Compile Include="Source\Systems\CommandSystem.cs" />
+    <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +124,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Actions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="ContentPathGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
