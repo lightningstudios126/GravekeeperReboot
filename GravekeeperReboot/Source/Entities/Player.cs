@@ -4,21 +4,18 @@ using Nez;
 using Nez.Sprites;
 
 namespace GravekeeperReboot.Source.Entities {
-    public class Player{
-        public Entity PlayerEntity { get;  private set; }
+    public sealed class Player : Prefab {
+		public override string Type => "Player";
 
-        private Player(Entity playerEntity) {
-			this.PlayerEntity = playerEntity;	
-		}
-
-        public static Player CreatePlayer (Scene scene) {
+		public override Entity Instantiate (Scene scene) {
 			Entity player;
-            player = scene.createEntity("Player");
+            player = scene.createEntity(Type);
             player.setTag((int)Tags.Player);
+
 			player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
 				.addComponent(new MoveComponent());
 
-            return new Player(player);
+            return player;
         }
     }
 }
