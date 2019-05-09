@@ -7,18 +7,18 @@ using Nez.Tiled;
 
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
-		Player player;
+		Entity player;
 		TiledMap testmap;
 
 		public override void initialize() {
 			base.initialize();
-			this.addRenderer(new DefaultRenderer());
+			addRenderer(new DefaultRenderer());
 		
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(this));
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 
-			player = Player.CreatePlayer(this);
+			player = Prefabs.Player.Instantiate(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
 		}
 
@@ -38,6 +38,5 @@ namespace GravekeeperReboot.Scenes {
 		public override void update() {
 			base.update();
 		}
-
 	}
 }
