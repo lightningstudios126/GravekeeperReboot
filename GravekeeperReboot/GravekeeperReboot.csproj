@@ -54,7 +54,9 @@
     <Compile Include="Source\Components\MoveComponent.cs" />
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
-    <Compile Include="Source\Input\Command.cs" />
+    <Compile Include="Source\Input\ICommand.cs" />
+    <Compile Include="Source\Input\MoveCommand.cs" />
+    <Compile Include="Source\Input\UndoCommand.cs" />
     <Compile Include="Source\Systems\CommandSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />

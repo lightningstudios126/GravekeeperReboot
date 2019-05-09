@@ -3,13 +3,7 @@ using Components;
 using Microsoft.Xna.Framework;
 
 namespace Input {
-    public class Command {
-        public Command() { }
-        public virtual void Execute() { }
-		public virtual void Undo() { }
-    }
-
-    public class MoveCommand : Command{
+	public class MoveCommand : ICommand{
         private Entity target;
         private Vector2 position;
 		private Vector2 previousPosition;
@@ -22,13 +16,12 @@ namespace Input {
             this.position = position;
         }
 
-        public override void Execute() {
+        void ICommand.Execute() {
 			previousPosition = target.position;
 			target.getComponent<MoveComponent>().targetPosition = position;
         }
 
-		public override void Undo() {
-			base.Undo();
+		void ICommand.Undo() {
 			target.getComponent<MoveComponent>().targetPosition = previousPosition;
 		}
 	}

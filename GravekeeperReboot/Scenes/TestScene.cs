@@ -14,10 +14,10 @@ namespace Scenes {
 		public override void initialize() {
 			base.initialize();
 			this.addRenderer(new DefaultRenderer());
-
-			addEntityProcessor(new InputSystem());
-			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+		
 			addEntityProcessor(new CommandSystem());
+			addEntityProcessor(new InputSystem(this));
+			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))))
 
 			player = Player.CreatePlayer(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
