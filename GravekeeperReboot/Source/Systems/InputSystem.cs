@@ -1,10 +1,11 @@
-﻿using Entities;
+﻿using GravekeeperReboot.Source.Commands;
+using GravekeeperReboot.Source.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 using System;
 
-namespace Input {
+namespace GravekeeperReboot.Source.Systems {
     public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
 		private Action AButton, BButton, CButton;

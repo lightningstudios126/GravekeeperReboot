@@ -54,12 +54,13 @@
     <Compile Include="Source\Components\MoveComponent.cs" />
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
-    <Compile Include="Source\Input\ICommand.cs" />
-    <Compile Include="Source\Input\MoveCommand.cs" />
-    <Compile Include="Source\Input\UndoCommand.cs" />
+    <Compile Include="Source\Commands\ICommand.cs" />
+    <Compile Include="Source\Commands\MoveCommand.cs" />
+    <Compile Include="Source\Commands\UndoCommand.cs" />
     <Compile Include="Source\Systems\CommandSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
+    <Compile Include="Source\TiledMapConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

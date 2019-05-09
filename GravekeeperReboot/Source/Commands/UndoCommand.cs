@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Input {
+namespace GravekeeperReboot.Source.Commands {
 	class UndoCommand : ICommand {
 		void ICommand.Undo() {
 			throw new NotImplementedException("wait that's illegal: undo");

@@ -1,12 +1,11 @@
-﻿using Components;
-using Entities;
-using Input;
+﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
+using GravekeeperReboot.Source.Systems;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;
-using Systems;
 
-namespace Scenes {
+namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
 		Player player;
 		TiledMap testmap;
@@ -28,7 +27,12 @@ namespace Scenes {
 
 			Entity tileMapEntity = createEntity("tileMapEntity");
 			TiledMapComponent comp = tileMapEntity.addComponent(new TiledMapComponent(testmap));
-			tileMapEntity.position = new Vector2(100, 100);
+
+			//comp.tiledMap.getObjectGroup()
+
+			tileMapEntity.position = new Vector2(0, 0);
+			camera.position = comp.bounds.center;
+			camera.zoom = 1f;
 		}
 
 		public override void update() {

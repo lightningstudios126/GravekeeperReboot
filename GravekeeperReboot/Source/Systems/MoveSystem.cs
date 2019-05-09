@@ -1,8 +1,8 @@
-﻿using Components;
+﻿using GravekeeperReboot.Source.Components;
 using Nez;
 using System.Collections.Generic;
 
-namespace Systems {
+namespace GravekeeperReboot.Source.Systems {
     class MoveSystem : EntitySystem {
         public MoveSystem(Matcher matcher) : base(matcher) {
         }

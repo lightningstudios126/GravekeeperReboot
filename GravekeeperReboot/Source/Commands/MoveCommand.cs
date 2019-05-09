@@ -1,8 +1,8 @@
 ﻿using Nez;
-using Components;
 using Microsoft.Xna.Framework;
+using GravekeeperReboot.Source.Components;
 
-namespace Input {
+namespace GravekeeperReboot.Source.Commands {
 	public class MoveCommand : ICommand{
         private Entity target;
         private Vector2 position;

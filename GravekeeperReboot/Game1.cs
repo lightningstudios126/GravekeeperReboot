@@ -1,9 +1,8 @@
-﻿using Input;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Nez;
-using Scenes;
+using GravekeeperReboot.Scenes;
 
 namespace GravekeeperReboot {
 	/// <summary>

@@ -1,9 +1,9 @@
-﻿using Components;
+﻿using GravekeeperReboot.Source.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
 
-namespace Entities {
+namespace GravekeeperReboot.Source.Entities {
     public class Player{
         public Entity PlayerEntity { get;  private set; }
 

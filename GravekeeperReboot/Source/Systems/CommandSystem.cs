@@ -1,7 +1,8 @@
-﻿using Nez;
+﻿using GravekeeperReboot.Source.Commands;
+using Nez;
 using System.Collections.Generic;
 
-namespace Input {
+namespace GravekeeperReboot.Source.Systems {
 	public class CommandSystem : ProcessingSystem {
 		private Stack<ICommand> commandsExecuted = new Stack<ICommand>();
 		private Queue<ICommand> commandBuffer = new Queue<ICommand>();
