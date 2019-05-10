@@ -1,12 +1,13 @@
 ﻿namespace GravekeeperReboot.Source {
 	static class TiledMapConstants {
 		// floor tiles
-		public static string Floor = "Floor";
+		public const string Floor = "Floor";
 		// places where moving objects will spawn
-		public static string Spawns = "Spawns";
+		public const string Spawns = "Spawns";
 		// places of importance
-		public static string Markers = "Markers";
+		public const string Markers = "Markers";
 
-
+		// Dimensions of every tile
+		public const int TileSize = 16;
 	}
 }

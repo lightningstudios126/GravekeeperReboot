@@ -17,6 +17,7 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(this));
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
 
 			player = Prefabs.Player.Instantiate(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
@@ -27,8 +28,6 @@ namespace GravekeeperReboot.Scenes {
 
 			Entity tileMapEntity = createEntity("tileMapEntity");
 			TiledMapComponent comp = tileMapEntity.addComponent(new TiledMapComponent(testmap));
-
-			//comp.tiledMap.getObjectGroup()
 
 			tileMapEntity.position = new Vector2(0, 0);
 			camera.position = comp.bounds.center;
