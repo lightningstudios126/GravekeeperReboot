@@ -8,9 +8,9 @@ namespace GravekeeperReboot.Source.Entities {
 	class Soul : Prefab{
 		public override string Type => "Soul";
 
-		public override Entity Instantiate(Scene scene) {
+		public override Entity Instantiate(Scene scene, Vector2 position) {
 			Entity soul;
-			soul = scene.createEntity(Type);
+			soul = scene.createEntity(Type, position);
 			soul.setTag((int)Tags.Soul);
 
 			soul.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.soul)))
