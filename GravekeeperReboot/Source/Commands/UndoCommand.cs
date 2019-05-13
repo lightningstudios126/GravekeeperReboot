@@ -1,12 +1,12 @@
 ﻿using System;
 
 namespace GravekeeperReboot.Source.Commands {
-	class UndoCommand : ICommand {
-		void ICommand.Undo() {
+	public class UndoCommand : Command {
+		public override void Undo() {
 			throw new NotImplementedException("wait that's illegal: undo");
 		}
 
-		void ICommand.Execute() {
+		public override void Execute() {
 			throw new NotImplementedException("wait that's illegal: execute");
 		}
 	}

@@ -63,7 +63,7 @@
     <Compile Include="Source\Entities\Prefabs.cs" />
     <Compile Include="Source\Entities\Soul.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
-    <Compile Include="Source\Commands\ICommand.cs" />
+    <Compile Include="Source\Commands\Command.cs" />
     <Compile Include="Source\Commands\MoveCommand.cs" />
     <Compile Include="Source\Commands\UndoCommand.cs" />
     <Compile Include="Source\Systems\CommandSystem.cs" />

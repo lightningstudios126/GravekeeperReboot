@@ -4,20 +4,24 @@ using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
 	public class CommandSystem : ProcessingSystem {
-		private Stack<ICommand> commandsExecuted = new Stack<ICommand>();
-		private Queue<ICommand> commandBuffer = new Queue<ICommand>();
+		private Stack<Command> commandsExecuted = new Stack<Command>();
+		private Queue<Command> commandBuffer = new Queue<Command>();
 
-		public void QueueCommand(ICommand command) {
+		public void QueueCommand(Command command) {
 			commandBuffer.Enqueue(command);
 		}
 
 		public override void process() {
 			while (commandBuffer.Count > 0) {
-				ICommand command = commandBuffer.Dequeue();
+				Command command = commandBuffer.Dequeue();
 				if (!(command is UndoCommand)) {
 					command.Execute();
 					commandsExecuted.Push(command);
 				} else if (commandsExecuted.Count > 0) {
+					// Undo all non-player initiated commands
+					while (!commandsExecuted.Peek().playerInitiated)
+						commandsExecuted.Pop().Undo();
+
 					commandsExecuted.Pop().Undo();
 				}
 			}

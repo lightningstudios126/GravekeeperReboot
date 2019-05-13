@@ -4,7 +4,7 @@ using Nez;
 using System;
 
 namespace GravekeeperReboot.Source.Commands {
-	public class GrabCommand : ICommand {
+	public class GrabCommand : Command {
 		private Entity grabber;
 		private GrabComponent grabComponent;
 
@@ -18,7 +18,7 @@ namespace GravekeeperReboot.Source.Commands {
 			grabComponent = grabber.getComponent<GrabComponent>();
 		}
 
-		void ICommand.Execute() {
+		public override void Execute() {
 			if (!grabComponent.isGrabbing) {
 				Vector2 checkPosition = grabber.position + grabber.getComponent<RotateComponent>().Direction * TiledMapConstants.TileSize;
 				Collider collider = Physics.overlapCircle(checkPosition, 0.1f);
@@ -36,7 +36,7 @@ namespace GravekeeperReboot.Source.Commands {
 			}
 		}
 
-		void ICommand.Undo() {
+		public override void Undo() {
 
 		}
 	}
