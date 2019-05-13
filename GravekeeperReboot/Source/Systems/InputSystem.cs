@@ -6,19 +6,17 @@ using Nez;
 using System;
 
 namespace GravekeeperReboot.Source.Systems {
-    public class InputSystem : ProcessingSystem {
+	public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
 		private Action WButton, AButton, SButton, DButton, CButton, LeftArrow, RightArrow, LShift;
 		private Entity player => scene.findEntity("Player");
 
 		public InputSystem(Scene scene) : base() {
-			commandSystem = scene.getEntityProcessor<CommandSystem>();
 
-			// Button Assignments
-			WButton = () => MoveUp();
-			AButton = () => MoveLeft();
-			SButton = () => MoveDown();
-			DButton = () => MoveRight();
+			WButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, -TiledMapConstants.TileSize)));
+			AButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(-TiledMapConstants.TileSize, 0)));
+			SButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, TiledMapConstants.TileSize)));
+			DButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(TiledMapConstants.TileSize, 0)));
 
 			LeftArrow = () => RotateLeft();
 			RightArrow = () => RotateRight();
@@ -27,6 +25,8 @@ namespace GravekeeperReboot.Source.Systems {
 		}
 
 		public override void process() {
+			if (commandSystem == null) commandSystem = scene.getEntityProcessor<CommandSystem>();
+
 			if (Input.isKeyPressed(Keys.W)) WButton();
 			if (Input.isKeyPressed(Keys.A)) AButton();
 			if (Input.isKeyPressed(Keys.S)) SButton();
