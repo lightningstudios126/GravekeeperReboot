@@ -7,6 +7,8 @@
 		// places of importance
 		public const string Markers = "Markers";
 
+		public const string Exit = "Exit";
+
 		// Dimensions of every tile
 		public const int TileSize = 16;
 	}

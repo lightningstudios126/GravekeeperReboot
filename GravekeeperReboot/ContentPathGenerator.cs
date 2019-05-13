@@ -27,6 +27,8 @@ namespace Nez
 		public static class Tilemaps
 		{
 			public const string testmap = @"Tilemaps\testmap";
+			public const string testmap1 = @"Tilemaps\testmap1";
+			public const string testsetatlas = @"Tilemaps\Testset-atlas";
 		}
 
 

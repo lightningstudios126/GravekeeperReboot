@@ -1,4 +1,5 @@
-﻿using GravekeeperReboot.Source.Components;
+﻿using GravekeeperReboot.Source;
+using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Systems;
 using Microsoft.Xna.Framework;
@@ -7,8 +8,7 @@ using Nez.Tiled;
 
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
-		Entity player;
-		TiledMap testmap;
+		GameBoard gameBoard;
 
 		Entity soul;
 
@@ -20,21 +20,16 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new InputSystem(this));
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
-
-			player = Prefabs.Player.Instantiate(this);
-			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
 			soul = Prefabs.Soul.Instantiate(this);
+			Entity tileMapEntity = createEntity("tileMapEntity");
+			gameBoard = addSceneComponent(new GameBoard(tileMapEntity));
 		}
 
 		public override void onStart() {
 			base.onStart();
-
-			Entity tileMapEntity = createEntity("tileMapEntity");
-			TiledMapComponent comp = tileMapEntity.addComponent(new TiledMapComponent(testmap));
-
-			tileMapEntity.position = new Vector2(0, 0);
-			camera.position = comp.bounds.center;
-			camera.zoom = 1f;
+			gameBoard.LoadLevel(Content.Tilemaps.testmap1);
+			camera.setPosition(gameBoard.Center);
+			camera.zoomIn(10);
 		}
 
 		public override void update() {
