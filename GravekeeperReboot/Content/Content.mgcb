@@ -154,6 +154,11 @@
 /processor:TiledMapProcessor
 /build:Tilemaps/testmap.tmx
 
+#begin Tilemaps/testmap1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tilemaps/testmap1.tmx
+
 #begin Tilemaps/Testset-atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor

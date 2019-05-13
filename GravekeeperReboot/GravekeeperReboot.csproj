@@ -53,6 +53,7 @@
     <Compile Include="Scenes\TestScene.cs" />
     <Compile Include="Source\Components\MoveComponent.cs" />
     <Compile Include="Source\Entities\Player.cs" />
+    <Compile Include="Source\GameBoard.cs" />
     <Compile Include="Source\Prefabs\Prefab.cs" />
     <Compile Include="Source\Prefabs\Prefabs.cs" />
     <Compile Include="Source\Entities\Tags.cs" />

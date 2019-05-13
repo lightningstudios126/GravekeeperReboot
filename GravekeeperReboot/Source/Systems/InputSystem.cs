@@ -12,10 +12,10 @@ namespace GravekeeperReboot.Source.Systems {
 
 		public InputSystem(Scene scene) : base() {
 			commandSystem = scene.getEntityProcessor<CommandSystem>();
-			WButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, -10)));
-			AButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(-10, 0)));
-			SButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, 10)));
-			DButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(10, 0)));
+			WButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, -16)));
+			AButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(-16, 0)));
+			SButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, 16)));
+			DButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(16, 0)));
 			CButton = () => commandSystem.AddCommand(new UndoCommand());
 		}
 
