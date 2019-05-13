@@ -12,6 +12,9 @@ namespace GravekeeperReboot.Source {
 	class GameBoard : SceneComponent {
 		Entity tileMapEntity;
 		TiledMapComponent mapComponent;
+		Point exit;
+
+		public Vector2 Center => mapComponent.bounds.center;
 
 		public GameBoard (Entity tileMapEntity) {
 			this.tileMapEntity = tileMapEntity;
@@ -28,9 +31,10 @@ namespace GravekeeperReboot.Source {
 		public void LoadLevel(string location) {
 			mapComponent.tiledMap = scene.content.Load<TiledMap>(location);
 			foreach (TiledObject obj in mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Spawns).objects) {
-				Console.WriteLine(Prefabs.prefabs["Player"]);
 				Prefabs.prefabs[obj.type].Instantiate(scene, mapComponent.tiledMap.tileToWorldPosition(new Point(obj.x, obj.y)));
 			}
+			TiledObject exitObject = mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Markers).objectsWithType(TiledMapConstants.Exit)[0];
+			exit = new Point(exitObject.x, exitObject.y);
 		}
 	}
 }

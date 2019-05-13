@@ -25,7 +25,9 @@ namespace GravekeeperReboot.Scenes {
 
 		public override void onStart() {
 			base.onStart();
-			getSceneComponent<GameBoard>().LoadLevel(Content.Tilemaps.testmap1);
+			gameBoard.LoadLevel(Content.Tilemaps.testmap1);
+			camera.setPosition(gameBoard.Center);
+			camera.zoomIn(10);
 		}
 
 		public override void update() {
