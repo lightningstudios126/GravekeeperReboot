@@ -4,7 +4,6 @@ using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Systems;
 using Microsoft.Xna.Framework;
 using Nez;
-using Nez.Tiled;
 
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
