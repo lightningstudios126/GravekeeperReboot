@@ -10,6 +10,8 @@ namespace GravekeeperReboot.Scenes {
 		Entity player;
 		TiledMap testmap;
 
+		Entity soul;
+
 		public override void initialize() {
 			base.initialize();
 			addRenderer(new DefaultRenderer());
@@ -21,6 +23,7 @@ namespace GravekeeperReboot.Scenes {
 
 			player = Prefabs.Player.Instantiate(this);
 			testmap = content.Load<TiledMap>(Content.Tilemaps.testmap);
+			soul = Prefabs.Soul.Instantiate(this);
 		}
 
 		public override void onStart() {

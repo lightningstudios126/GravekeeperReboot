@@ -6,17 +6,26 @@ namespace GravekeeperReboot.Source.Commands {
 		private Entity target;
 		private float offset;
 
+		private RotateComponent rotateComponent;
+
 		public RotateCommand(Entity target, float offset) {
+			if(target.getComponent<RotateComponent>() == null)
+				throw new System.ArgumentException("Target does not have a RotateComponent attached!");
+
 			this.target = target;
 			this.offset = offset;
+
+			rotateComponent = target.getComponent<RotateComponent>();
 		}
 
 		void ICommand.Execute() {
-			target.getComponent<RotateComponent>().targetRotation += offset;
+			rotateComponent.targetRotation += offset;
+			rotateComponent.UpdateDirection();
 		}
 
 		void ICommand.Undo() {
-			target.getComponent<RotateComponent>().targetRotation -= offset;
+			rotateComponent.targetRotation -= offset;
+			rotateComponent.UpdateDirection();
 		}
 	}
 }

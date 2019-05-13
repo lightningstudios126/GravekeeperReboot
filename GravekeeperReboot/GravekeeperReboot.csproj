@@ -53,11 +53,13 @@
     <Compile Include="Scenes\TestScene.cs" />
     <Compile Include="Source\Commands\GrabCommand.cs" />
     <Compile Include="Source\Commands\RotateCommand.cs" />
+    <Compile Include="Source\Components\GrabComponent.cs" />
     <Compile Include="Source\Components\MoveComponent.cs" />
     <Compile Include="Source\Components\RotateComponent.cs" />
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Prefab.cs" />
     <Compile Include="Source\Entities\Prefabs.cs" />
+    <Compile Include="Source\Entities\Soul.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
     <Compile Include="Source\Commands\ICommand.cs" />
     <Compile Include="Source\Commands\MoveCommand.cs" />
@@ -90,7 +92,7 @@
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
       <Link>x64\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

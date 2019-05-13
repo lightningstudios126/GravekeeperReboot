@@ -1,5 +1,8 @@
-﻿using GravekeeperReboot.Source.Components;
+﻿using GravekeeperReboot.Source.Commands;
+using GravekeeperReboot.Source.Components;
+using Microsoft.Xna.Framework;
 using Nez;
+using System;
 using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
@@ -10,7 +13,23 @@ namespace GravekeeperReboot.Source.Systems {
 			base.process(entities);
 			foreach (Entity entity in entities) {
 				RotateComponent component = entity.getComponent<RotateComponent>();
-				entity.setRotationDegrees(component.targetRotation);
+				if (component.targetRotation != entity.rotationDegrees) {
+					entity.setRotationDegrees(component.targetRotation);
+					
+					//if (entity.getComponent<GrabComponent>() != null && entity.getComponent<GrabComponent>().isGrabbing) {
+					//	GrabComponent grabComp = entity.getComponent<GrabComponent>();
+					//
+					//
+					//	Vector2 offset = Vector2.Normalize(entity.position - grabComp.target.position);
+					//	Vector2 finalOffset = offset * TiledMapConstants.TileSize + component.Direction * TiledMapConstants.TileSize * ;
+					//
+					//
+					//	Console.WriteLine("RotationOffset: " + component.Direction);
+					//
+					//	CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
+					//	commandSystem.QueueCommand(new MoveCommand(grabComp.target, finalOffset));
+					//}
+				}
 			}
 		}
 	}
