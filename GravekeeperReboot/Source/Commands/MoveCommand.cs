@@ -1,7 +1,7 @@
-﻿using Nez;
+﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Extensions;
 using Microsoft.Xna.Framework;
-using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.Entities;
+using Nez;
 
 namespace GravekeeperReboot.Source.Commands {
 	public class MoveCommand : Command {

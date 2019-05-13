@@ -1,7 +1,9 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Extensions;
 using Microsoft.Xna.Framework;
 using Nez;
+using System;
 using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
@@ -13,20 +15,22 @@ namespace GravekeeperReboot.Source.Systems {
         protected override void process(List<Entity> entities) {
             base.process(entities);
 			if (gameBoard == null) gameBoard = scene.getSceneComponent<GameBoard>();
+
             foreach(Entity entity in entities) {
                 MoveComponent component = entity.getComponent<MoveComponent>();
-				if (entity.position != gameBoard.TileToWorldPosition(component.targetPosition)) {
-					entity.position = gameBoard.TileToWorldPosition(component.targetPosition);
+				if (entity.position != component.targetPosition) {
+					entity.position = component.targetPosition;
+					//entity.position = gameBoard.TileToWorldPosition(component.targetPosition);
 
-					if (entity.getComponent<GrabComponent>() != null && entity.getComponent<GrabComponent>().isGrabbing) {
+					if (entity.HasComponent<GrabComponent>() && entity.getComponent<GrabComponent>().isGrabbing) {
 						GrabComponent grabComponent = entity.getComponent<GrabComponent>();
 					
 						Vector2 offset = entity.position - grabComponent.target.position;
 						if (offset == Vector2.Zero) // Player overlaps with target when pushing forward
 							offset = entity.getComponent<RotateComponent>().Direction;
-						else
-							Vector2.Normalize(offset);
-					
+						else 
+							offset = Vector2.Normalize(offset);
+						
 						CommandSystem commandSystem = Core.scene.getEntityProcessor<CommandSystem>();
 						Command command = new MoveCommand(grabComponent.target, offset * TiledMapConstants.TileSize) { playerInitiated = false };
 						commandSystem.QueueCommand(command);

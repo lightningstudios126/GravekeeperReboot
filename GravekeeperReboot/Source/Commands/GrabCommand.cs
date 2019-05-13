@@ -1,4 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Extensions;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
@@ -21,8 +22,9 @@ namespace GravekeeperReboot.Source.Commands {
 		public override void Execute() {
 			if (!grabComponent.isGrabbing) {
 				Vector2 checkPosition = grabber.position + grabber.getComponent<RotateComponent>().Direction * TiledMapConstants.TileSize;
+
 				Collider collider = Physics.overlapCircle(checkPosition, 0.1f);
-				Console.WriteLine("Checking at: " + grabber.position + grabber.getComponent<RotateComponent>().Direction * TiledMapConstants.TileSize);
+				Console.WriteLine("Checking at: " + grabber.getComponent<RotateComponent>().Direction * TiledMapConstants.TileSize);
 
 				if (collider != null) {
 					Console.WriteLine("Grabbing Entity: " + collider.entity.name);
