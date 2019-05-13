@@ -16,7 +16,7 @@ namespace GravekeeperReboot.Scenes {
 			addRenderer(new DefaultRenderer());
 		
 			addEntityProcessor(new CommandSystem());
-			addEntityProcessor(new InputSystem(this));
+			addEntityProcessor(new InputSystem()); 
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
 			soul = Prefabs.Soul.Instantiate(this, Vector2.Zero);
