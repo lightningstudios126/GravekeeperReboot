@@ -6,14 +6,17 @@ using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
 	class MoveSystem : EntitySystem {
+		GameBoard gameBoard;
+
         public MoveSystem(Matcher matcher) : base(matcher) {}
 
         protected override void process(List<Entity> entities) {
             base.process(entities);
+			if (gameBoard == null) gameBoard = scene.getSceneComponent<GameBoard>();
             foreach(Entity entity in entities) {
                 MoveComponent component = entity.getComponent<MoveComponent>();
-				if (entity.position != component.targetPosition) {
-					entity.position = component.targetPosition;
+				if (entity.position != gameBoard.TileToWorldPosition(component.targetPosition)) {
+					entity.position = gameBoard.TileToWorldPosition(component.targetPosition);
 
 					//if (entity.getComponent<GrabComponent>() != null && entity.getComponent<GrabComponent>().isGrabbing) {
 					//	GrabComponent grabComponent = entity.getComponent<GrabComponent>();

@@ -9,15 +9,15 @@ namespace GravekeeperReboot.Source.Systems {
     public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
 		private Action WButton, AButton, SButton, DButton, CButton, LeftArrow, RightArrow, LShift;
-		private Entity player => scene.findEntitiesWithTag((int)Tags.Player)[0];
+		private Entity player => scene.findEntity("Player");
 
 		public InputSystem(Scene scene) : base() {
 			commandSystem = scene.getEntityProcessor<CommandSystem>();
 
-			WButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, -TiledMapConstants.TileSize)));
-			AButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(-TiledMapConstants.TileSize, 0)));
-			SButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, TiledMapConstants.TileSize)));
-			DButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(TiledMapConstants.TileSize, 0)));
+			WButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Point(0, -1)));
+			AButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Point(-1, 0)));
+			SButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Point(0, 1)));
+			DButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Point(1, 0)));
 
 			LeftArrow = () => commandSystem.QueueCommand(new RotateCommand(player, -90));
 			RightArrow = () => commandSystem.QueueCommand(new RotateCommand(player, 90));
