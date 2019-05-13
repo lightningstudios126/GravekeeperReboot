@@ -17,6 +17,7 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(this));
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
+			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
 
 			Entity tileMapEntity = createEntity("tileMapEntity");
 			gameBoard = addSceneComponent(new GameBoard(tileMapEntity));

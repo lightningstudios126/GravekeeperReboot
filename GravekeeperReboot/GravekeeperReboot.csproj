@@ -51,11 +51,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\TestScene.cs" />
+    <Compile Include="Source\Commands\GrabCommand.cs" />
+    <Compile Include="Source\Commands\RotateCommand.cs" />
+	<Compile Include="Source\Components\GameBoard.cs" />
     <Compile Include="Source\Components\MoveComponent.cs" />
+    <Compile Include="Source\Components\RotateComponent.cs" />
     <Compile Include="Source\Entities\Player.cs" />
-    <Compile Include="Source\GameBoard.cs" />
-    <Compile Include="Source\Prefabs\Prefab.cs" />
-    <Compile Include="Source\Prefabs\Prefabs.cs" />
+    <Compile Include="Source\Entities\Prefab.cs" />
+    <Compile Include="Source\Entities\Prefabs.cs" />
     <Compile Include="Source\Entities\Tags.cs" />
     <Compile Include="Source\Commands\ICommand.cs" />
     <Compile Include="Source\Commands\MoveCommand.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Source\Systems\CommandSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
+    <Compile Include="Source\Systems\RotateSystem.cs" />
     <Compile Include="Source\TiledMapConstants.cs" />
   </ItemGroup>
   <ItemGroup>

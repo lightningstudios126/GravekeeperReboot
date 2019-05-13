@@ -8,15 +8,20 @@ using System;
 namespace GravekeeperReboot.Source.Systems {
     public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
-		private Action WButton, AButton, SButton, DButton, CButton;
+		private Action WButton, AButton, SButton, DButton, CButton, LeftButton;
+		private Entity player => scene.findEntitiesWithTag((int)Tags.Player)[0];
 
 		public InputSystem(Scene scene) : base() {
 			commandSystem = scene.getEntityProcessor<CommandSystem>();
-			WButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, -16)));
-			AButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(-16, 0)));
-			SButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(0, 16)));
-			DButton = () => commandSystem.AddCommand(new MoveCommand(scene.findEntitiesWithTag((int)Tags.Player)[0], new Vector2(16, 0)));
-			CButton = () => commandSystem.AddCommand(new UndoCommand());
+
+			WButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, -TiledMapConstants.TileSize)));
+			AButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(-TiledMapConstants.TileSize, 0)));
+			SButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, TiledMapConstants.TileSize)));
+			DButton = () => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(TiledMapConstants.TileSize, 0)));
+
+			LeftButton = () => commandSystem.QueueCommand(new RotateCommand(player, -90));
+
+			CButton = () => commandSystem.QueueCommand(new UndoCommand());
 		}
 
 		public override void process() {
@@ -25,6 +30,7 @@ namespace GravekeeperReboot.Source.Systems {
 			if (Input.isKeyPressed(Keys.S)) SButton();
 			if (Input.isKeyPressed(Keys.D)) DButton();
 			if (Input.isKeyPressed(Keys.C)) CButton();
+			if (Input.isKeyPressed(Keys.Left)) LeftButton();
 		}
 
 	}

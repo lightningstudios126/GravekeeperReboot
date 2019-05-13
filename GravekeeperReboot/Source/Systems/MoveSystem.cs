@@ -9,9 +9,9 @@ namespace GravekeeperReboot.Source.Systems {
         protected override void process(List<Entity> entities) {
             base.process(entities);
             foreach(Entity entity in entities) {
-                MoveComponent moveComponent = entity.getComponent<MoveComponent>();
-                if (entity.position != moveComponent.targetPosition)
-                    entity.position = moveComponent.targetPosition;
+                MoveComponent component = entity.getComponent<MoveComponent>();
+                if (entity.position != component.targetPosition)
+                    entity.position = component.targetPosition;
             }
         }
     }

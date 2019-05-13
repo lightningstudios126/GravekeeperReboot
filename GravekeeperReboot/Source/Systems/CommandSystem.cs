@@ -7,7 +7,7 @@ namespace GravekeeperReboot.Source.Systems {
 		private Stack<ICommand> commandsExecuted = new Stack<ICommand>();
 		private Queue<ICommand> commandBuffer = new Queue<ICommand>();
 
-		public void AddCommand(ICommand command) {
+		public void QueueCommand(ICommand command) {
 			commandBuffer.Enqueue(command);
 		}
 
