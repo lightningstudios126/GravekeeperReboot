@@ -13,7 +13,8 @@ namespace GravekeeperReboot.Source.Entities {
 
 		static Prefabs() {
 			prefabs = new Dictionary<string, Prefab> {
-				{ Player.Type, Player }
+				{ Player.Type, Player },
+				{ Soul.Type, Soul }
 			};
 		}
 	}
