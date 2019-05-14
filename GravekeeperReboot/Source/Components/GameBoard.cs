@@ -63,5 +63,4 @@ namespace GravekeeperReboot.Source {
 			return tileEntities.Find(pred);
 		}
 	}
-
 }

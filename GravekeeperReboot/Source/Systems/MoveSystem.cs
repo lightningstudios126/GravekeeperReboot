@@ -29,6 +29,8 @@ namespace GravekeeperReboot.Source.Systems {
 						Point offset = moveComponent.position - grabbedMoveComponent.position;
 						if (offset == Point.Zero) // Player overlaps with target when pushing forward
 							offset = Utilities.Direction.DirectionPointOffset(entity.getComponent<RotateComponent>().direction);
+						else
+							offset = offset.Normalize();
 						
 						CommandSystem commandSystem = Core.scene.getEntityProcessor<CommandSystem>();
 						Command command = new MoveCommand(grabComponent.target, offset) { playerInitiated = false };
