@@ -40,13 +40,13 @@ namespace GravekeeperReboot.Source.Systems {
 
 
 		// Main Game Actions
-		public void MoveUp() => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, -TiledMapConstants.TileSize)));
-		public void MoveLeft() => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(-TiledMapConstants.TileSize, 0)));
-		public void MoveDown() => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(0, TiledMapConstants.TileSize)));
-		public void MoveRight() => commandSystem.QueueCommand(new MoveCommand(player, new Vector2(TiledMapConstants.TileSize, 0)));
+		public void MoveUp() => commandSystem.QueueCommand(new MoveCommand(player, new Point(0, -1)));
+		public void MoveLeft() => commandSystem.QueueCommand(new MoveCommand(player, new Point(-1, 0)));
+		public void MoveDown() => commandSystem.QueueCommand(new MoveCommand(player, new Point(0, 1)));
+		public void MoveRight() => commandSystem.QueueCommand(new MoveCommand(player, new Point(1, 0)));
 
-		public void RotateLeft() => commandSystem.QueueCommand(new RotateCommand(player, -90));
-		public void RotateRight() => commandSystem.QueueCommand(new RotateCommand(player, 90));
+		public void RotateLeft() => commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
+		public void RotateRight() => commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
 
 		public void Grab() => commandSystem.QueueCommand(new GrabCommand(player));
 		public void Undo() => commandSystem.QueueCommand(new UndoCommand());

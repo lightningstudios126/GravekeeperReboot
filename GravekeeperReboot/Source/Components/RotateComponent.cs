@@ -1,14 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Nez;
+using static GravekeeperReboot.Source.Utilities.Direction;
 
 namespace GravekeeperReboot.Source.Components {
 	public class RotateComponent : Component {
-		public float targetRotation;
-		public Vector2 Direction { get; private set; } = new Vector2(0, -1);
+		/// <summary>
+		/// Direction that the entity with this component should be facing.
+		/// </summary>
+		public Directions direction = Directions.UP;
 
-		public void UpdateDirection() {
-			float angle = entity.rotation;
-			Direction = -Vector2.Normalize(new Vector2(Mathf.roundToInt(Mathf.cos(angle)), Mathf.roundToInt(Mathf.sin(angle))));
-		}
+		//public void UpdateDirection() {
+		//	float angle = entity.rotation;
+		//	Direction = -Vector2.Normalize(new Vector2(Mathf.roundToInt(Mathf.cos(angle)), Mathf.roundToInt(Mathf.sin(angle))));
+		//}
 	}
 }

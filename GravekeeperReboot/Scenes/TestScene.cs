@@ -9,8 +9,6 @@ namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
 		GameBoard gameBoard;
 
-		Entity soul;
-
 		public override void initialize() {
 			base.initialize();
 			addRenderer(new DefaultRenderer());
@@ -19,7 +17,6 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new InputSystem(this)); 
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
-			soul = Prefabs.Soul.Instantiate(this, Vector2.Zero);
 			gameBoard = addSceneComponent(new GameBoard());
 		}
 

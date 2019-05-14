@@ -17,22 +17,21 @@ namespace GravekeeperReboot.Source.Systems {
 			if (gameBoard == null) gameBoard = scene.getSceneComponent<GameBoard>();
 
             foreach(Entity entity in entities) {
-                MoveComponent component = entity.getComponent<MoveComponent>();
-				if (entity.position != component.targetPosition) {
-					entity.position = component.targetPosition;
-					//entity.position = gameBoard.TileToWorldPosition(component.targetPosition);
+                MoveComponent moveComponent = entity.getComponent<MoveComponent>();
+				if (entity.position != gameBoard.TileToWorldPosition(moveComponent.position)) {
+					//entity.position = component.targetPosition;
+					entity.position = gameBoard.TileToWorldPosition(moveComponent.position);
 
 					if (entity.HasComponent<GrabComponent>() && entity.getComponent<GrabComponent>().isGrabbing) {
 						GrabComponent grabComponent = entity.getComponent<GrabComponent>();
+						MoveComponent grabbedMoveComponent = grabComponent.target.getComponent<MoveComponent>();
 					
-						Vector2 offset = entity.position - grabComponent.target.position;
-						if (offset == Vector2.Zero) // Player overlaps with target when pushing forward
-							offset = entity.getComponent<RotateComponent>().Direction;
-						else 
-							offset = Vector2.Normalize(offset);
+						Point offset = moveComponent.position - grabbedMoveComponent.position;
+						if (offset == Point.Zero) // Player overlaps with target when pushing forward
+							offset = Utilities.Direction.DirectionPointOffset(entity.getComponent<RotateComponent>().direction);
 						
 						CommandSystem commandSystem = Core.scene.getEntityProcessor<CommandSystem>();
-						Command command = new MoveCommand(grabComponent.target, offset * TiledMapConstants.TileSize) { playerInitiated = false };
+						Command command = new MoveCommand(grabComponent.target, offset) { playerInitiated = false };
 						commandSystem.QueueCommand(command);
 					}
 				}

@@ -10,8 +10,8 @@ namespace GravekeeperReboot.Source.Systems {
 			base.process(entities);
 			foreach (Entity entity in entities) {
 				RotateComponent component = entity.getComponent<RotateComponent>();
-				if (component.targetRotation != entity.rotationDegrees) {
-					entity.setRotationDegrees(component.targetRotation);
+				if (entity.rotationDegrees != Utilities.Direction.DirectionDegrees(component.direction)) {
+					entity.setRotationDegrees(Utilities.Direction.DirectionDegrees(component.direction));
 					
 					//if (entity.getComponent<GrabComponent>() != null && entity.getComponent<GrabComponent>().isGrabbing) {
 					//	GrabComponent grabComp = entity.getComponent<GrabComponent>();

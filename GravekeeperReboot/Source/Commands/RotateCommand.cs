@@ -6,13 +6,13 @@ using Nez;
 namespace GravekeeperReboot.Source.Commands {
 	class RotateCommand : Command {
 		private Entity entity;
-		private float offset;
+		private Utilities.Direction.Directions offset;
 
 		private RotateComponent rotateComponent;
 
-		public RotateCommand(Entity entity, float offset) {
+		public RotateCommand(Entity entity, Utilities.Direction.Directions offset) {
 			if(!entity.HasComponent<RotateComponent>())
-				throw new System.NullReferenceException("Target does not have a RotateComponent attached!");
+				throw new System.ArgumentException("Target does not have a RotateComponent attached!");
 
 			this.entity = entity;
 			this.offset = offset;
@@ -21,13 +21,11 @@ namespace GravekeeperReboot.Source.Commands {
 		}
 
 		public override void Execute() {
-			rotateComponent.targetRotation += offset;
-			rotateComponent.UpdateDirection();
+			rotateComponent.direction = Utilities.Direction.DirAdd(rotateComponent.direction, offset);
 		}
 
 		public override void Undo() {
-			rotateComponent.targetRotation -= offset;
-			rotateComponent.UpdateDirection();
+			rotateComponent.direction = Utilities.Direction.DirAdd(rotateComponent.direction, offset+2);
 		}
 	}
 }
