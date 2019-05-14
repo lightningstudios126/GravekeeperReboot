@@ -73,6 +73,7 @@
     <Compile Include="Source\Systems\RotateSystem.cs" />
     <Compile Include="Source\TiledMapConstants.cs" />
     <Compile Include="Source\Utilities\Direction.cs" />
+    <Compile Include="Source\Utilities\Directions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -2,10 +2,6 @@
 
 namespace GravekeeperReboot.Source.Utilities {
 	public class Direction {
-		public enum Directions {
-			RIGHT, UP, LEFT, DOWN
-		}
-
 		/// <summary>
 		/// Returns a tile coordinate representing one tile in the specified direction
 		/// </summary>

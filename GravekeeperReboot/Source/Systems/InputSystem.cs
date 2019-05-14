@@ -1,6 +1,5 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 using System;
@@ -8,20 +7,20 @@ using System;
 namespace GravekeeperReboot.Source.Systems {
 	public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
-		private Action WButton, AButton, SButton, DButton, CButton, LeftArrow, RightArrow, LShift;
+		private Action MoveUpAction, MoveLeftAction, MoveDownAction, MoveRightAction, UndoAction, RotateLeftAction, RotateRightAction, GrabAction;
 		private Entity player;
 		private RotateComponent rotateComponent;
 		public InputSystem() : base() {
 
-			WButton = MoveUp;
-			AButton = () => MoveLeft();
-			SButton = () => MoveDown();
-			DButton = () => MoveRight();
+			MoveUpAction = () => Move(Utilities.Directions.UP);
+			MoveLeftAction = () => Move(Utilities.Directions.LEFT);
+			MoveDownAction = () => Move(Utilities.Directions.DOWN);
+			MoveRightAction = () => Move(Utilities.Directions.RIGHT);
 
-			LeftArrow = () => RotateLeft();
-			RightArrow = () => RotateRight();
-			LShift = () => Grab();
-			CButton = () => Undo();
+			RotateLeftAction = () => Rotate(Utilities.Directions.LEFT);
+			RotateRightAction = () => Rotate(Utilities.Directions.RIGHT);
+			GrabAction = Grab;
+			UndoAction = Undo;
 		}
 
 		public override void process() {
@@ -29,51 +28,36 @@ namespace GravekeeperReboot.Source.Systems {
 			if (player == null) player = scene.findEntity("Player");
 			if (rotateComponent == null) rotateComponent = player.getComponent<RotateComponent>();
 
-			if (Input.isKeyPressed(Keys.W)) WButton();
-			if (Input.isKeyPressed(Keys.A)) AButton();
-			if (Input.isKeyPressed(Keys.S)) SButton();
-			if (Input.isKeyPressed(Keys.D)) DButton();
+			if (Input.isKeyPressed(Keys.W)) MoveUpAction();
+			if (Input.isKeyPressed(Keys.A)) MoveLeftAction();
+			if (Input.isKeyPressed(Keys.S)) MoveDownAction();
+			if (Input.isKeyPressed(Keys.D)) MoveRightAction();
 
-			if (Input.isKeyPressed(Keys.C)) CButton();
-			if (Input.isKeyPressed(Keys.Left)) LeftArrow();
-			if (Input.isKeyPressed(Keys.Right)) RightArrow();
-			if (Input.isKeyPressed(Keys.LeftShift)) LShift();
-			if (Input.isKeyReleased(Keys.LeftShift)) LShift();
+			//if (Input.isKeyPressed(Keys.Left)) RotateLeftAction();
+			//if (Input.isKeyPressed(Keys.Right)) RotateRightAction();
+
+			if (Input.isKeyPressed(Keys.LeftShift)) GrabAction();
+			if (Input.isKeyReleased(Keys.LeftShift)) GrabAction();
+
+			if (Input.isKeyPressed(Keys.C)) UndoAction();			
 		}
 
 
 		// Main Game Actions
-		public void MoveUp() {
-			if (rotateComponent.direction == Utilities.Direction.Directions.LEFT) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
-			} else if (rotateComponent.direction == Utilities.Direction.Directions.RIGHT) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
-			} else commandSystem.QueueCommand(new MoveCommand(player, new Point(0, -1)));
-		}
-		public void MoveLeft() {
-			if (rotateComponent.direction == Utilities.Direction.Directions.UP) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
-			} else if (rotateComponent.direction == Utilities.Direction.Directions.DOWN) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
-			} else commandSystem.QueueCommand(new MoveCommand(player, new Point(-1, 0)));
-		}
-		public void MoveDown() {
-			if (rotateComponent.direction == Utilities.Direction.Directions.LEFT) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
-			} else if (rotateComponent.direction == Utilities.Direction.Directions.RIGHT) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
-			} else commandSystem.QueueCommand(new MoveCommand(player, new Point(0, 1)));
-		}
-		public void MoveRight() {
-			if (rotateComponent.direction == Utilities.Direction.Directions.UP) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
-			} else if (rotateComponent.direction == Utilities.Direction.Directions.DOWN) {
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
-			} else commandSystem.QueueCommand(new MoveCommand(player, new Point(1, 0)));
-		}
+		public void Move(Utilities.Directions direction) {
+			int dir = (int)direction;
 
-		public void RotateLeft() => commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.LEFT));
-		public void RotateRight() => commandSystem.QueueCommand(new RotateCommand(player, Utilities.Direction.Directions.RIGHT));
+			if (rotateComponent.direction == (Utilities.Directions)((dir + 1) % 4))
+				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Directions.RIGHT));
+			else if (rotateComponent.direction == (Utilities.Directions)((dir + 3) % 4))
+				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Directions.LEFT));
+			else
+				commandSystem.QueueCommand(new MoveCommand(player, Utilities.Direction.DirectionPointOffset((Utilities.Directions)dir)));
+		}
+		
+		public void Rotate(Utilities.Directions direction) {
+			commandSystem.QueueCommand(new RotateCommand(player, direction));
+		}
 
 		public void Grab() => commandSystem.QueueCommand(new GrabCommand(player));
 		public void Undo() => commandSystem.QueueCommand(new UndoCommand());

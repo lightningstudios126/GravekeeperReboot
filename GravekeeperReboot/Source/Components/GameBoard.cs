@@ -22,7 +22,7 @@ namespace GravekeeperReboot.Source {
 			base.onEnabled();
 			if (tileMapEntity == null)
 				tileMapEntity = scene.createEntity(EntityName);
-			if (this.tileMapEntity.getComponent<TiledMapComponent>() == null)
+			if (!this.tileMapEntity.HasComponent<TiledMapComponent>())
 				tileMapEntity.addComponent(new TiledMapComponent(null));
 			mapComponent = tileMapEntity.getComponent<TiledMapComponent>();
 			tileEntities = new List<Entity>();

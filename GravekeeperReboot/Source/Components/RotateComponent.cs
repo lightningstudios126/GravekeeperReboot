@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GravekeeperReboot.Source.Utilities;
+using Microsoft.Xna.Framework;
 using Nez;
-using static GravekeeperReboot.Source.Utilities.Direction;
 
 namespace GravekeeperReboot.Source.Components {
 	public class RotateComponent : Component {

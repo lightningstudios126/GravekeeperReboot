@@ -10,6 +10,8 @@ namespace GravekeeperReboot.Source.Commands {
 		private GrabComponent grabComponent;
 
 		public GrabCommand(Entity grabber) {
+			this.playerInitiated = false;
+
 			if (!grabber.HasComponent<RotateComponent>())
 				throw new ArgumentException("Target does not have a RotateComponent attached!");
 			if (!grabber.HasComponent<GrabComponent>())
@@ -39,7 +41,8 @@ namespace GravekeeperReboot.Source.Commands {
 		}
 
 		public override void Undo() {
-
+			grabComponent.isGrabbing = false;
+			grabComponent.target = null;
 		}
 	}
 }
