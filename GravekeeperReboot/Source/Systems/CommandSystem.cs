@@ -11,6 +11,12 @@ namespace GravekeeperReboot.Source.Systems {
 			commandBuffer.Enqueue(command);
 		}
 
+		public void QueueCommand(params Command[] commands) {
+			foreach (Command command in commands) {
+				commandBuffer.Enqueue(command);
+			}
+		}
+
 		public override void process() {
 			while (commandBuffer.Count > 0) {
 				Command command = commandBuffer.Dequeue();

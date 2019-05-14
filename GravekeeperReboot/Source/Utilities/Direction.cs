@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GravekeeperReboot.Source.Utilities {
 	public class Direction {
@@ -11,6 +6,11 @@ namespace GravekeeperReboot.Source.Utilities {
 			RIGHT, UP, LEFT, DOWN
 		}
 
+		/// <summary>
+		/// Returns a tile coordinate representing one tile in the specified direction
+		/// </summary>
+		/// <param name="d"></param>
+		/// <returns></returns>
 		public static Point DirectionPointOffset(Directions d) {
 			switch (d) {
 				case Directions.RIGHT:

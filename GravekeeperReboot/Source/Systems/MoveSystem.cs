@@ -19,7 +19,6 @@ namespace GravekeeperReboot.Source.Systems {
             foreach(Entity entity in entities) {
                 MoveComponent moveComponent = entity.getComponent<MoveComponent>();
 				if (entity.position != gameBoard.TileToWorldPosition(moveComponent.position)) {
-					//entity.position = component.targetPosition;
 					entity.position = gameBoard.TileToWorldPosition(moveComponent.position);
 
 					if (entity.HasComponent<GrabComponent>() && entity.getComponent<GrabComponent>().isGrabbing) {
@@ -32,7 +31,7 @@ namespace GravekeeperReboot.Source.Systems {
 						else
 							offset = offset.Normalize();
 						
-						CommandSystem commandSystem = Core.scene.getEntityProcessor<CommandSystem>();
+						CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
 						Command command = new MoveCommand(grabComponent.target, offset) { playerInitiated = false };
 						commandSystem.QueueCommand(command);
 					}

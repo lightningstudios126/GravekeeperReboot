@@ -10,9 +10,9 @@ namespace GravekeeperReboot.Source.Commands {
 		private GrabComponent grabComponent;
 
 		public GrabCommand(Entity grabber) {
-			if (grabber.getComponent<RotateComponent>() == null)
+			if (!grabber.HasComponent<RotateComponent>())
 				throw new ArgumentException("Target does not have a RotateComponent attached!");
-			if (grabber.getComponent<GrabComponent>() == null)
+			if (!grabber.HasComponent<GrabComponent>())
 				throw new ArgumentException("Target does not have a GrabComponent attached!");
 
 			this.grabber = grabber;
