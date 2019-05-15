@@ -1,8 +1,7 @@
 ﻿using GravekeeperReboot.Source;
+using GravekeeperReboot.Source.ActionMapping;
 using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Systems;
-using Microsoft.Xna.Framework;
 using Nez;
 
 namespace GravekeeperReboot.Scenes {
@@ -14,7 +13,7 @@ namespace GravekeeperReboot.Scenes {
 			addRenderer(new DefaultRenderer());
 		
 			addEntityProcessor(new CommandSystem());
-			addEntityProcessor(new InputSystem()); 
+			addEntityProcessor(new InputSystem(new ArrowKeyBinding())); 
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(MoveComponent))));
 			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(RotateComponent))));
 			gameBoard = addSceneComponent(new GameBoard());

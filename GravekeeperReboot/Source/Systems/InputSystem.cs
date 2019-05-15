@@ -1,68 +1,43 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
-using Microsoft.Xna.Framework.Input;
+using GravekeeperReboot.Source.ActionMapping;
 using Nez;
-using System;
 
 namespace GravekeeperReboot.Source.Systems {
 	public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
-
-		private Action 
-			MoveUpAction, 
-			MoveLeftAction, 
-			MoveDownAction, 
-			MoveRightAction, 
-
-			RotateLeftAction, 
-			RotateRightAction,
-
-			GrabAction, 
-			ReleaseAction, 
-			ToggleGrabAction,
-
-			UndoAction;
+		KeyBinding inputMap;
 
 		private Entity player;
 		private RotateComponent rotateComponent;
-		public InputSystem() : base() {
+		private GrabComponent grabComponent;
 
-			MoveUpAction = () => Move(Utilities.Directions.UP);
-			MoveLeftAction = () => Move(Utilities.Directions.LEFT);
-			MoveDownAction = () => Move(Utilities.Directions.DOWN);
-			MoveRightAction = () => Move(Utilities.Directions.RIGHT);
-
-			RotateLeftAction = () => Rotate(Utilities.Directions.LEFT);
-			RotateRightAction = () => Rotate(Utilities.Directions.RIGHT);
-
-			ToggleGrabAction = () => Grab(!player.getComponent<GrabComponent>().isGrabbing);
-			GrabAction = () => Grab(true);
-			ReleaseAction = () => Grab(false);
-
-			UndoAction = Undo;
+		public InputSystem(KeyBinding inputMap) {
+			this.inputMap = inputMap;
 		}
 
 		public override void process() {
 			if (commandSystem == null) commandSystem = scene.getEntityProcessor<CommandSystem>();
 			if (player == null) player = scene.findEntity("Player");
 			if (rotateComponent == null) rotateComponent = player.getComponent<RotateComponent>();
+			if (grabComponent == null) grabComponent = player.getComponent<GrabComponent>();
 
-			if (Input.isKeyPressed(Keys.W)) MoveUpAction();
-			if (Input.isKeyPressed(Keys.A)) MoveLeftAction();
-			if (Input.isKeyPressed(Keys.S)) MoveDownAction();
-			if (Input.isKeyPressed(Keys.D)) MoveRightAction();
+			if (Input.isKeyPressed(inputMap.UpButton)) Move(Utilities.Directions.UP);
+			if (Input.isKeyPressed(inputMap.LeftButton)) Move(Utilities.Directions.LEFT);
+			if (Input.isKeyPressed(inputMap.DownButton)) Move(Utilities.Directions.DOWN);
+			if (Input.isKeyPressed(inputMap.RightButton)) Move(Utilities.Directions.RIGHT);
 
-			//if (Input.isKeyPressed(Keys.Left)) RotateLeftAction();
-			//if (Input.isKeyPressed(Keys.Right)) RotateRightAction();
+			//if (Input.isKeyPressed(inputMap.RotateLeftButton)) Rotate(Utilities.Directions.LEFT);
+			//if (Input.isKeyPressed(inputMap.RotateRightButton)) Rotate(Utilities.Directions.RIGHT);
 
 			// "Toggle" grab
-			//if (Input.isKeyPressed(Keys.LeftShift)) ToggleGrabAction();
+			//if (Input.isKeyPressed(inputMap.GrabButton)) Grab(!grabComponent.isGrabbing);
 
 			// "Hold" grab 
-			if (Input.isKeyPressed(Keys.LeftShift)) GrabAction();
-			if (Input.isKeyReleased(Keys.LeftShift)) ReleaseAction();
+			if (Input.isKeyPressed(inputMap.GrabButton)) Grab(true);
+			if (Input.isKeyReleased(inputMap.GrabButton)) Grab(false);
 
-			if (Input.isKeyPressed(Keys.C)) UndoAction();			
+			if (Input.isKeyPressed(inputMap.UndoButton)) Undo();			
 		}
 
 
