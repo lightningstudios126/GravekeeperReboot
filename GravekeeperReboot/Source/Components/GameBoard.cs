@@ -37,8 +37,8 @@ namespace GravekeeperReboot.Source {
 			foreach (TiledObject obj in mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Spawns).objects) {
 				System.Console.WriteLine("{0}, {1}", obj.x, obj.y);
 				Entity e = Prefabs.prefabs[obj.type].Instantiate(scene, Vector2.Zero);
-				tileEntities.Add(e);
 				e.getComponent<MoveComponent>().position = WorldToTilePosition(obj.position);
+				tileEntities.Add(e);
 			}
 			TiledObject exitObject = mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Markers).objectsWithType(TiledMapConstants.Exit)[0];
 			exit = new Point(exitObject.x, exitObject.y);
@@ -53,14 +53,7 @@ namespace GravekeeperReboot.Source {
 		}
 
 		public Entity FindAtLocation(Point tilePos) {
-			bool pred(Entity e) {
-				if (e.HasComponent<MoveComponent>()) {
-					MoveComponent move = e.getComponent<MoveComponent>();
-					return move.position == tilePos;
-				}
-				return false;
-			}
-			return tileEntities.Find(pred);
+			return tileEntities.Find(e => e.getComponent<MoveComponent>().position == tilePos);
 		}
 	}
 }
