@@ -7,7 +7,22 @@ using System;
 namespace GravekeeperReboot.Source.Systems {
 	public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
-		private Action MoveUpAction, MoveLeftAction, MoveDownAction, MoveRightAction, UndoAction, RotateLeftAction, RotateRightAction, GrabAction;
+
+		private Action 
+			MoveUpAction, 
+			MoveLeftAction, 
+			MoveDownAction, 
+			MoveRightAction, 
+
+			RotateLeftAction, 
+			RotateRightAction,
+
+			GrabAction, 
+			ReleaseAction, 
+			ToggleGrabAction,
+
+			UndoAction;
+
 		private Entity player;
 		private RotateComponent rotateComponent;
 		public InputSystem() : base() {
@@ -19,7 +34,11 @@ namespace GravekeeperReboot.Source.Systems {
 
 			RotateLeftAction = () => Rotate(Utilities.Directions.LEFT);
 			RotateRightAction = () => Rotate(Utilities.Directions.RIGHT);
-			GrabAction = Grab;
+
+			ToggleGrabAction = () => Grab(!player.getComponent<GrabComponent>().isGrabbing);
+			GrabAction = () => Grab(true);
+			ReleaseAction = () => Grab(false);
+
 			UndoAction = Undo;
 		}
 
@@ -36,8 +55,12 @@ namespace GravekeeperReboot.Source.Systems {
 			//if (Input.isKeyPressed(Keys.Left)) RotateLeftAction();
 			//if (Input.isKeyPressed(Keys.Right)) RotateRightAction();
 
+			// "Toggle" grab
+			//if (Input.isKeyPressed(Keys.LeftShift)) ToggleGrabAction();
+
+			// "Hold" grab 
 			if (Input.isKeyPressed(Keys.LeftShift)) GrabAction();
-			if (Input.isKeyReleased(Keys.LeftShift)) GrabAction();
+			if (Input.isKeyReleased(Keys.LeftShift)) ReleaseAction();
 
 			if (Input.isKeyPressed(Keys.C)) UndoAction();			
 		}
@@ -59,7 +82,13 @@ namespace GravekeeperReboot.Source.Systems {
 			commandSystem.QueueCommand(new RotateCommand(player, direction));
 		}
 
-		public void Grab() => commandSystem.QueueCommand(new GrabCommand(player));
-		public void Undo() => commandSystem.QueueCommand(new UndoCommand());
+		public void Grab(bool grabbing) {
+			commandSystem.QueueCommand(new GrabCommand(player, grabbing));
+		}
+
+		public void Undo() {
+			commandSystem.QueueCommand(new UndoCommand());
+			Grab(false);
+		}
 	}
 }
