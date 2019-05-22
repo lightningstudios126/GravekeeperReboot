@@ -25,7 +25,7 @@ namespace GravekeeperReboot.Source.Systems {
 					commandsExecuted.Push(command);
 				} else if (commandsExecuted.Count > 0) {
 					// Undo all non-player initiated commands
-					while (commandsExecuted.Count > 0 && !commandsExecuted.Peek().playerInitiated)
+					while (commandsExecuted.Count > 1 && !commandsExecuted.Peek().playerInitiated)
 						commandsExecuted.Pop().Undo();
 
 					commandsExecuted.Pop().Undo();
