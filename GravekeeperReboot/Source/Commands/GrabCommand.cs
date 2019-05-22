@@ -1,5 +1,6 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
@@ -10,13 +11,10 @@ namespace GravekeeperReboot.Source.Commands {
 		private GrabComponent grabComponent;
 
 		public GrabCommand(Entity grabber, bool grab) {
-			Console.WriteLine("Grabbing: " + grab);
 			this.playerInitiated = false;
 
-			if (!grabber.HasComponent<RotateComponent>())
-				throw new ArgumentException("Target does not have a RotateComponent attached!");
 			if (!grabber.HasComponent<GrabComponent>())
-				throw new ArgumentException("Target does not have a GrabComponent attached!");
+				throw new ArgumentException("Grabber does not have a GrabComponent attached!");
 
 			this.grabber = grabber;
 			grabComponent = grabber.getComponent<GrabComponent>();
@@ -25,18 +23,17 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Execute() {
 			if (!grabComponent.isGrabbing) {
-				Point checkPosition = grabber.getComponent<MoveComponent>().position + Utilities.Direction.DirectionPointOffset(grabber.getComponent<RotateComponent>().direction);
-				Entity checkedEntity = grabber.scene.getSceneComponent<GameBoard>().FindAtLocation(checkPosition);
-				//Console.WriteLine("Checking at: " + checkPosition);
-				Graphics.instance.batcher.drawCircle(grabber.scene.getSceneComponent<GameBoard>().TileToWorldPosition(checkPosition), 4, Color.Blue);
+				GameBoard gameboard = grabber.scene.getSceneComponent<GameBoard>();
+				TileComponent tileComponent = grabber.getComponent<TileComponent>();
 
-				if (checkedEntity != null) {
-					//Console.WriteLine("Grabbing Entity: " + checkedEntity.name);
+				Point checkPosition = tileComponent.tilePosition + Directions.DirectionPointOffset(tileComponent.tileDirection);
+				Entity checkedEntity = gameboard.FindAtLocation(checkPosition);
+
+				if (checkedEntity != null && checkedEntity.HasComponent<ControlComponent>()) {
 					grabComponent.isGrabbing = true;
 					grabComponent.target = checkedEntity;
 				}
 			} else {
-				//Console.WriteLine("Releasing Entity: " + grabComponent.target.name);
 				grabComponent.isGrabbing = false;
 				grabComponent.target = null;
 			}

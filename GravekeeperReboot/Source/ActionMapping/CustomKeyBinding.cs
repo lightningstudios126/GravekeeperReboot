@@ -16,7 +16,7 @@ namespace GravekeeperReboot.Source.ActionMapping {
 			UndoButton = Keys.X;
 		}
 
-		public void ReBind() {
+		public void Rebind() {
 
 		}
 	}

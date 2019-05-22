@@ -7,7 +7,7 @@ namespace GravekeeperReboot.Source.Components {
 		/// <summary>
 		/// Direction that the entity with this component should be facing.
 		/// </summary>
-		public Directions direction = Directions.UP;
+		public TileDirection direction = TileDirection.UP;
 
 		//public void UpdateDirection() {
 		//	float angle = entity.rotation;

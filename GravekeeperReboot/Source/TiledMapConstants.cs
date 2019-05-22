@@ -9,6 +9,8 @@
 
 		public const string Exit = "Exit";
 
+		public const string Gravestone = "Gravestone";
+
 		// Dimensions of every tile
 		public const int TileSize = 16;
 	}

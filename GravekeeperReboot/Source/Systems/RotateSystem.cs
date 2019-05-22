@@ -1,5 +1,7 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 using System.Collections.Generic;
@@ -12,12 +14,13 @@ namespace GravekeeperReboot.Source.Systems {
 			base.process(entities);
 			foreach (Entity entity in entities) {
 				RotateComponent rotateComponent = entity.getComponent<RotateComponent>();
-				int targetRotation = Utilities.Direction.DirectionDegrees(rotateComponent.direction);
+				int targetRotation = Directions.DirectionDegrees(rotateComponent.direction);
 
 				if (entity.rotationDegrees != targetRotation) {
 					entity.setRotationDegrees(targetRotation);
-					
-					if (entity.getComponent<GrabComponent>() != null && entity.getComponent<GrabComponent>().isGrabbing)
+
+					GrabComponent grabComponent = entity.getComponent<GrabComponent>();
+					if (grabComponent != null && grabComponent.isGrabbing && grabComponent.target != null)
 						ManipulateEntity(entity, rotateComponent);
 				}
 			}
@@ -28,11 +31,15 @@ namespace GravekeeperReboot.Source.Systems {
 		/// </summary>
 		private void ManipulateEntity(Entity entity, RotateComponent rotateComponent) {
 			GrabComponent grabComponent = entity.getComponent<GrabComponent>();
+			Entity target = grabComponent.target;
+			
+			if (!target.getComponent<ControlComponent>().isPivotable)
+				return;
 
 			// Moves target to grabber's position
-			Point offset = Vector2.Normalize(entity.position - grabComponent.target.position).roundToPoint();
+			Point offset = Vector2.Normalize(entity.position - target.position).roundToPoint();
 			// Pushes target out in the direction grabber is facing
-			Point playerDirection = Utilities.Direction.DirectionPointOffset(rotateComponent.direction);
+			Point playerDirection = Directions.DirectionPointOffset(rotateComponent.direction);
 
 			CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
 			commandSystem.QueueCommand(

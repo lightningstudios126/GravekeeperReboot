@@ -1,15 +1,16 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Utilities;
 using Nez;
 
 namespace GravekeeperReboot.Source.Commands {
 	class RotateCommand : Command {
 		private Entity entity;
-		private Utilities.Directions offset;
+		private TileDirection offset;
 
 		private RotateComponent rotateComponent;
 
-		public RotateCommand(Entity entity, Utilities.Directions offset) {
+		public RotateCommand(Entity entity, TileDirection offset) {
 			if(!entity.HasComponent<RotateComponent>())
 				throw new System.ArgumentException("Target does not have a RotateComponent attached!");
 
@@ -20,11 +21,11 @@ namespace GravekeeperReboot.Source.Commands {
 		}
 
 		public override void Execute() {
-			rotateComponent.direction = Utilities.Direction.DirAdd(rotateComponent.direction, offset);
+			rotateComponent.direction = Directions.DirAdd(rotateComponent.direction, offset);
 		}
 
 		public override void Undo() {
-			rotateComponent.direction = Utilities.Direction.DirAdd(rotateComponent.direction, offset+2);
+			rotateComponent.direction = Directions.DirAdd(rotateComponent.direction, offset+2);
 		}
 	}
 }

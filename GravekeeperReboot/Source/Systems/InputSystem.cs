@@ -22,10 +22,10 @@ namespace GravekeeperReboot.Source.Systems {
 			if (rotateComponent == null) rotateComponent = player.getComponent<RotateComponent>();
 			if (grabComponent == null) grabComponent = player.getComponent<GrabComponent>();
 
-			if (Input.isKeyPressed(inputMap.UpButton)) Move(Utilities.Directions.UP);
-			if (Input.isKeyPressed(inputMap.LeftButton)) Move(Utilities.Directions.LEFT);
-			if (Input.isKeyPressed(inputMap.DownButton)) Move(Utilities.Directions.DOWN);
-			if (Input.isKeyPressed(inputMap.RightButton)) Move(Utilities.Directions.RIGHT);
+			if (Input.isKeyPressed(inputMap.UpButton)) Move(Utilities.TileDirection.UP);
+			if (Input.isKeyPressed(inputMap.LeftButton)) Move(Utilities.TileDirection.LEFT);
+			if (Input.isKeyPressed(inputMap.DownButton)) Move(Utilities.TileDirection.DOWN);
+			if (Input.isKeyPressed(inputMap.RightButton)) Move(Utilities.TileDirection.RIGHT);
 
 			//if (Input.isKeyPressed(inputMap.RotateLeftButton)) Rotate(Utilities.Directions.LEFT);
 			//if (Input.isKeyPressed(inputMap.RotateRightButton)) Rotate(Utilities.Directions.RIGHT);
@@ -42,18 +42,18 @@ namespace GravekeeperReboot.Source.Systems {
 
 
 		// Main Game Actions
-		public void Move(Utilities.Directions direction) {
+		public void Move(Utilities.TileDirection direction) {
 			int dir = (int)direction;
 
-			if (rotateComponent.direction == (Utilities.Directions)((dir + 1) % 4))
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Directions.RIGHT));
-			else if (rotateComponent.direction == (Utilities.Directions)((dir + 3) % 4))
-				commandSystem.QueueCommand(new RotateCommand(player, Utilities.Directions.LEFT));
+			if (rotateComponent.direction == (Utilities.TileDirection)((dir + 1) % 4))
+				commandSystem.QueueCommand(new RotateCommand(player, Utilities.TileDirection.RIGHT));
+			else if (rotateComponent.direction == (Utilities.TileDirection)((dir + 3) % 4))
+				commandSystem.QueueCommand(new RotateCommand(player, Utilities.TileDirection.LEFT));
 			else
-				commandSystem.QueueCommand(new MoveCommand(player, Utilities.Direction.DirectionPointOffset((Utilities.Directions)dir)));
+				commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset((Utilities.TileDirection)dir)));
 		}
 		
-		public void Rotate(Utilities.Directions direction) {
+		public void Rotate(Utilities.TileDirection direction) {
 			commandSystem.QueueCommand(new RotateCommand(player, direction));
 		}
 

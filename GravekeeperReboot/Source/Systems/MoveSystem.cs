@@ -3,7 +3,6 @@ using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Extensions;
 using Microsoft.Xna.Framework;
 using Nez;
-using System;
 using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
@@ -22,7 +21,8 @@ namespace GravekeeperReboot.Source.Systems {
 				if (entity.position != targetPosition) {
 					entity.position = targetPosition;
 
-					if (entity.HasComponent<GrabComponent>() && entity.getComponent<GrabComponent>().isGrabbing)
+					GrabComponent grabComponent = entity.getComponent<GrabComponent>();
+					if (grabComponent != null && grabComponent.isGrabbing && grabComponent.target != null)
 						ManipulateEntity(entity, moveComponent);
 				}
             }
@@ -33,16 +33,21 @@ namespace GravekeeperReboot.Source.Systems {
 		/// </summary>
 		private void ManipulateEntity(Entity grabber, MoveComponent moveComponent) {
 			GrabComponent grabComponent = grabber.getComponent<GrabComponent>();
+			Entity target = grabComponent.target;
+
+			if (!target.getComponent<ControlComponent>().isPushable)
+				return;
+
 			MoveComponent grabbedMoveComponent = grabComponent.target.getComponent<MoveComponent>();
 
 			Point offset = moveComponent.position - grabbedMoveComponent.position;
 			if (offset == Point.Zero) // Player overlaps with target when pushing forward
-				offset = Utilities.Direction.DirectionPointOffset(grabber.getComponent<RotateComponent>().direction);
+				offset = Utilities.Directions.DirectionPointOffset(grabber.getComponent<RotateComponent>().direction);
 			else // Otherwise the grabber is pulling, not pushing
 				offset = offset.Normalize();
 
 			CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
-			Command command = new MoveCommand(grabComponent.target, offset) { playerInitiated = false };
+			Command command = new MoveCommand(target, offset) { playerInitiated = false };
 			commandSystem.QueueCommand(command);
 		}
 	}

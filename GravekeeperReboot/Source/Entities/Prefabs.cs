@@ -4,8 +4,7 @@ namespace GravekeeperReboot.Source.Entities {
 	class Prefabs {
 		public static readonly Prefab Player = new Player();
 		public static readonly Prefab Soul = new Soul();
-		// Soul
-		// Block
+		public static readonly Prefab Block  = new Block();
 		// Wall
 		// Gravestone
 
@@ -14,7 +13,8 @@ namespace GravekeeperReboot.Source.Entities {
 		static Prefabs() {
 			prefabs = new Dictionary<string, Prefab> {
 				{ Player.Type, Player },
-				{ Soul.Type, Soul }
+				{ Soul.Type, Soul },
+				{ Block.Type, Block }
 			};
 		}
 	}
