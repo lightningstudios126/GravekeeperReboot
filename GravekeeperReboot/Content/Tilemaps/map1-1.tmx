@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="7" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="4">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="46">
  <tileset firstgid="1" name="Testset" tilewidth="16" tileheight="16" tilecount="11" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -36,21 +36,24 @@
    <image width="16" height="16" source="../Sprites/Tiles/Soul.png"/>
   </tile>
  </tileset>
- <layer id="5" name="Floor" width="7" height="5">
+ <layer id="10" name="Floor" width="5" height="5">
   <data encoding="csv">
-0,0,0,0,0,0,0,
-0,7,0,5,5,4,0,
-0,4,0,6,0,6,0,
-0,6,7,7,0,1,0,
-0,0,0,0,0,0,0
+0,0,0,0,0,
+0,0,5,0,0,
+0,6,6,0,0,
+0,7,3,1,0,
+0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="Spawns">
-  <object id="1" type="Player" gid="10" x="16" y="32" width="16" height="16"/>
-  <object id="3" type="Soul" gid="11" x="16" y="48" width="16" height="16"/>
+ <objectgroup id="7" name="Spawns">
+  <object id="33" type="Player" gid="10" x="32" y="48" width="16" height="16"/>
+  <object id="34" type="Soul" gid="11" x="16" y="48" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="3" name="Markers">
-  <object id="2" type="Exit" x="80" y="48">
+ <objectgroup id="8" name="Markers" visible="0">
+  <object id="43" type="Exit" x="48" y="48">
+   <point/>
+  </object>
+  <object id="44" type="Gravestone" x="32" y="48">
    <point/>
   </object>
  </objectgroup>

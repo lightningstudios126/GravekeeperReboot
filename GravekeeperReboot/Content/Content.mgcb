@@ -171,3 +171,8 @@
 /processorParam:TextureFormat=Color
 /build:Tilemaps/Testset-atlas.png
 
+#begin Tilemaps/map1-1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tilemaps/map1-1.tmx
+
