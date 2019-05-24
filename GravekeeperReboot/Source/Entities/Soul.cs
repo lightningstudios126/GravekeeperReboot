@@ -14,7 +14,6 @@ namespace GravekeeperReboot.Source.Entities {
 
 			soul.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.soul)))
 				.addComponent(new TileComponent())
-				.addComponent(new MoveComponent())
 				.addComponent(new ControlComponent(true, true));
 
 			return soul;

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Nez;
 
 namespace GravekeeperReboot.Source.Components {
-	class TileComponent : Component {
+	public class TileComponent : Component {
 		public Point tilePosition;
 		public TileDirection tileDirection;
 
@@ -19,12 +19,7 @@ namespace GravekeeperReboot.Source.Components {
 			this.tilePosition = tilePosition;
 
 			entity.position = board.TileToWorldPosition(tilePosition);
-			if (entity.HasComponent<MoveComponent>())
-				entity.getComponent<MoveComponent>().position = tilePosition;
-
 			entity.rotation = Directions.DirectionDegrees(direction);
-			if(entity.HasComponent<RotateComponent>())
-				entity.getComponent<RotateComponent>().direction = direction;
 		}
 
 		public override void onEntityTransformChanged(Transform.Component comp) {
