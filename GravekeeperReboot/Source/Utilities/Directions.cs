@@ -37,11 +37,11 @@ namespace GravekeeperReboot.Source.Utilities {
 		}
 
 		public static TileDirection DegreesDirection(float degrees) {
-			return (TileDirection)(Math.Abs(360 - degrees + 90) % 360 / 90);
+			return (TileDirection)(degrees % 360 / 90);
 		}
 
 		public static TileDirection DirAdd(TileDirection a, TileDirection b) {
-			return (TileDirection)(((int)a + (int)b+3) % 4);
+			return (TileDirection)(((int)a + (int)b) % 4);
 		}
 	}
 
