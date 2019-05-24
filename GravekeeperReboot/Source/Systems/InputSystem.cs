@@ -49,7 +49,6 @@ namespace GravekeeperReboot.Source.Systems {
 
 		public void Undo() {
 			commandSystem.QueueCommand(new UndoCommand());
-			Grab(false);
 		}
 	}
 }
