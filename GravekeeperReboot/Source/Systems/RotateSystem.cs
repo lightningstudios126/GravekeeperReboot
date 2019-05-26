@@ -1,6 +1,5 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
@@ -37,9 +36,9 @@ namespace GravekeeperReboot.Source.Systems {
 			if (!target.getComponent<ControlComponent>().isPivotable)
 				return;
 
-			// Moves target to grabber's position
+			// Move target to grabber's position
 			Point offset = Vector2.Normalize(entity.position - target.position).roundToPoint();
-			// Pushes target out in the direction grabber is facing
+			// Pushe target out in the direction grabber is facing
 			Point playerDirection = Directions.DirectionPointOffset(entityTileComponent.tileDirection);
 
 			CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();

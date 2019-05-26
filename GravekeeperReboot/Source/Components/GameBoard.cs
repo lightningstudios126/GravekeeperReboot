@@ -3,10 +3,8 @@ using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Tiled;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Tiled;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +26,7 @@ namespace GravekeeperReboot.Source {
 
 			if (tileMapEntity == null)
 				tileMapEntity = scene.createEntity(EntityName);
-			if (!this.tileMapEntity.HasComponent<TiledMapComponent>())
+			if (!tileMapEntity.HasComponent<TiledMapComponent>())
 				tileMapEntity.addComponent(new TiledMapComponent(null));
 
 			mapComponent = tileMapEntity.getComponent<TiledMapComponent>();

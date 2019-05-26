@@ -31,7 +31,6 @@ namespace GravekeeperReboot {
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-
         }
 
 		/// <summary>
@@ -52,7 +51,6 @@ namespace GravekeeperReboot {
 				Exit();
 
             // TODO: Add your update logic here
-
             base.Update(gameTime);
 		}
 

@@ -5,6 +5,7 @@
 		// places where moving objects will spawn
 		public const string LAYER_SPAWNS = "Entities";
 
+		// the name of the custom property
 		public const string PROPERTY_TYPE = "TileName";
 
 		public const string TYPE_EXIT = "Exit";

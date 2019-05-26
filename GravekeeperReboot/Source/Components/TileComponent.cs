@@ -1,5 +1,4 @@
-﻿using GravekeeperReboot.Source.Extensions;
-using GravekeeperReboot.Source.Utilities;
+﻿using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 

@@ -1,6 +1,6 @@
-﻿using GravekeeperReboot.Source.Commands;
+﻿using GravekeeperReboot.Source.ActionMapping;
+using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.ActionMapping;
 using Nez;
 
 namespace GravekeeperReboot.Source.Systems {

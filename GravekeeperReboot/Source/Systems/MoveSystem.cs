@@ -45,7 +45,7 @@ namespace GravekeeperReboot.Source.Systems {
 			Point offset = grabberTile.tilePosition - targetTile.tilePosition;
 			// if the grabber is overlapping the target, it should be pushed
 			if (offset == Point.Zero)
-			offset = Utilities.Directions.DirectionPointOffset(grabber.getComponent<TileComponent>().tileDirection);
+				offset = Utilities.Directions.DirectionPointOffset(grabber.getComponent<TileComponent>().tileDirection);
 			else 
 				offset = offset.Normalize();
 
