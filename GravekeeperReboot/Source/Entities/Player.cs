@@ -14,8 +14,6 @@ namespace GravekeeperReboot.Source.Entities {
 
 			player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
 				.addComponent(new TileComponent())
-				.addComponent(new MoveComponent())
-				.addComponent(new RotateComponent())
 				.addComponent(new GrabComponent());
 
             return player;

@@ -6,7 +6,7 @@ namespace GravekeeperReboot.Source.Components {
 		public bool isPushable;
 		public bool isPivotable;
 
-		public MoveComponent moveComponent;
+		public TileComponent tileComponent;
 
 		public ControlComponent(bool isPushable, bool isPivotable) {
 			this.isPushable = isPushable;
@@ -16,10 +16,10 @@ namespace GravekeeperReboot.Source.Components {
 		public override void onAddedToEntity() {
 			base.onAddedToEntity();
 
-			if (isPushable && !entity.HasComponent<MoveComponent>())
-				throw new System.NullReferenceException("Entity is pushable yet has no MoveComponent");
-			if (isPivotable && !entity.HasComponent<MoveComponent>())
-				throw new System.NullReferenceException("Entity is pivotable yet has no MoveComponent");
+			if (isPushable && !entity.HasComponent<TileComponent>())
+				throw new System.NullReferenceException("Entity is pushable yet has no TileComponent");
+			if (isPivotable && !entity.HasComponent<TileComponent>())
+				throw new System.NullReferenceException("Entity is pivotable yet has no TileComponent");
 		}
 	}
 }

@@ -8,23 +8,23 @@ namespace GravekeeperReboot.Source.Commands {
         private Entity entity;
         private Point offset;
 
-		private MoveComponent moveComponent;
+		private TileComponent entityTile;
        
         public MoveCommand(Entity entity, Point offset) {
-			if (!entity.HasComponent<MoveComponent>())
-				throw new System.ArgumentException("Target does not have a MoveComponent attached!");
+			if (!entity.HasComponent<TileComponent>())
+				throw new System.ArgumentException("Target does not have a TileComponent attached!");
 
             this.entity = entity;
             this.offset = offset;
-			moveComponent = entity.getComponent<MoveComponent>();
+			entityTile = entity.getComponent<TileComponent>();
 		}
 
 		public override void Execute() {
-			moveComponent.position += offset;
+			entityTile.tilePosition += offset;
         }
 
 		public override void Undo() {
-			moveComponent.position -= offset;
+			entityTile.tilePosition -= offset;
 		}
 	}
 }

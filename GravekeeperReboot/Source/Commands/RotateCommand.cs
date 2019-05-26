@@ -8,24 +8,24 @@ namespace GravekeeperReboot.Source.Commands {
 		private Entity entity;
 		private TileDirection offset;
 
-		private RotateComponent rotateComponent;
+		private TileComponent entityTile;
 
 		public RotateCommand(Entity entity, TileDirection offset) {
-			if(!entity.HasComponent<RotateComponent>())
-				throw new System.ArgumentException("Target does not have a RotateComponent attached!");
+			if(!entity.HasComponent<TileComponent>())
+				throw new System.ArgumentException("Target does not have a TileComponent attached!");
 
 			this.entity = entity;
 			this.offset = offset;
 
-			rotateComponent = entity.getComponent<RotateComponent>();
+			entityTile = entity.getComponent<TileComponent>();
 		}
 
 		public override void Execute() {
-			rotateComponent.direction = Directions.DirAdd(rotateComponent.direction, offset);
+			entityTile.tileDirection = Directions.DirAdd(entityTile.tileDirection, offset);
 		}
 
 		public override void Undo() {
-			rotateComponent.direction = Directions.DirAdd(rotateComponent.direction, offset+2);
+			entityTile.tileDirection = Directions.DirAdd(entityTile.tileDirection, offset+2);
 		}
 	}
 }

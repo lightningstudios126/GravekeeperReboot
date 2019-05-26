@@ -8,9 +8,6 @@ namespace GravekeeperReboot.Source.ActionMapping {
 			DownButton = Keys.S;
 			RightButton = Keys.D;
 
-			RotateLeftButton = Keys.Left;
-			RotateRightButton = Keys.Right;
-
 			GrabButton = Keys.LeftShift;
 			UndoButton = Keys.C;
 		}

@@ -13,15 +13,15 @@ namespace GravekeeperReboot.Source.Systems {
 		protected override void process(List<Entity> entities) {
 			base.process(entities);
 			foreach (Entity entity in entities) {
-				RotateComponent rotateComponent = entity.getComponent<RotateComponent>();
-				int targetRotation = Directions.DirectionDegrees(rotateComponent.direction);
+				TileComponent entityTile = entity.getComponent<TileComponent>();
+				int targetRotation = Directions.DirectionDegrees(entityTile.tileDirection);
 
 				if (entity.rotationDegrees != targetRotation) {
 					entity.setRotationDegrees(targetRotation);
 
 					GrabComponent grabComponent = entity.getComponent<GrabComponent>();
 					if (grabComponent != null && grabComponent.isGrabbing && grabComponent.target != null)
-						ManipulateEntity(entity, rotateComponent);
+						ManipulateEntity(entity);
 				}
 			}
 		}
@@ -29,7 +29,8 @@ namespace GravekeeperReboot.Source.Systems {
 		/// <summary>
 		/// Moves an entity along with the player when grabbing
 		/// </summary>
-		private void ManipulateEntity(Entity entity, RotateComponent rotateComponent) {
+		private void ManipulateEntity(Entity entity) {
+			TileComponent entityTileComponent = entity.getComponent<TileComponent>();
 			GrabComponent grabComponent = entity.getComponent<GrabComponent>();
 			Entity target = grabComponent.target;
 			
@@ -39,7 +40,7 @@ namespace GravekeeperReboot.Source.Systems {
 			// Moves target to grabber's position
 			Point offset = Vector2.Normalize(entity.position - target.position).roundToPoint();
 			// Pushes target out in the direction grabber is facing
-			Point playerDirection = Directions.DirectionPointOffset(rotateComponent.direction);
+			Point playerDirection = Directions.DirectionPointOffset(entityTileComponent.tileDirection);
 
 			CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
 			commandSystem.QueueCommand(

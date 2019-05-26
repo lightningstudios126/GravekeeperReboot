@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace GravekeeperReboot.Source {
-	class GameBoard : SceneComponent {
+	public class GameBoard : SceneComponent {
 		public const string EntityName = "tileMapEntity";
 
 		Entity tileMapEntity;
@@ -70,7 +70,7 @@ namespace GravekeeperReboot.Source {
 		}
 
 		public Entity FindAtLocation(Point tilePos) {
-			return tileEntities.Find(e => e.getComponent<MoveComponent>().position == tilePos);
+			return tileEntities.Find(e => e.getComponent<TileComponent>().tilePosition == tilePos);
 		}
 
 		public bool GroundAtLocation(Point tilePosition) {

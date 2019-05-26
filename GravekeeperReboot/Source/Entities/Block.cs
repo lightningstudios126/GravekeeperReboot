@@ -14,7 +14,6 @@ namespace GravekeeperReboot.Source.Entities {
 
 			block.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.movableWall)))
 				.addComponent(new TileComponent())
-				.addComponent(new MoveComponent())
 				.addComponent(new ControlComponent(true, false));
 
 			return block;
