@@ -1,10 +1,14 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Tiled;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Tiled;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GravekeeperReboot.Source {
 	class GameBoard : SceneComponent {
@@ -12,10 +16,10 @@ namespace GravekeeperReboot.Source {
 
 		Entity tileMapEntity;
 		TiledMapComponent mapComponent;
-		Point exit;
+		TiledTile exit;
 
 		List<Entity> tileEntities;
-		List<Point> graveStones;
+		List<TiledTile> graveStones;
 
 		public Vector2 Center => mapComponent.bounds.center;
 
@@ -30,7 +34,7 @@ namespace GravekeeperReboot.Source {
 			mapComponent = tileMapEntity.getComponent<TiledMapComponent>();
 
 			tileEntities = new List<Entity>();
-			graveStones = new List<Point>();
+			graveStones = new List<TiledTile>();
 		}
 
 		public void LoadLevel(int world, int level) {
@@ -40,23 +44,25 @@ namespace GravekeeperReboot.Source {
 		public void LoadLevel(string location) {
 			mapComponent.tiledMap = scene.content.Load<TiledMap>(location);
 
-			foreach (TiledObject obj in mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Spawns).objects) {
+			List<TiledTile> spawnTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_SPAWNS).tiles.ToList();
+			spawnTiles.RemoveAll(t => t == null);
 
-				Entity e = Prefabs.prefabs[obj.type].Instantiate(scene, Vector2.Zero);
-				e.getComponent<TileComponent>().Initialize(this, WorldToTilePosition(obj.position));
+			foreach (TiledTile tile in spawnTiles) {
+				string type = tile.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE];
+				Entity e = Prefabs.prefabs[type].Instantiate(scene, Vector2.Zero);
+				e.getComponent<TileComponent>().Initialize(this, WorldToTilePosition(tile.getWorldPosition(mapComponent.tiledMap)));
 				tileEntities.Add(e);
 			}
 
-			TiledObject exitObject = mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Markers).objectsWithType(TiledMapConstants.Exit)[0];
-			exit = exitObject.position.roundToPoint();
+			List<TiledTile> floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
+			floorTiles.RemoveAll(t => t == null);
 
-			foreach (TiledObject gravestone in mapComponent.tiledMap.getObjectGroup(TiledMapConstants.Markers).objectsWithType(TiledMapConstants.Gravestone)) {
-				graveStones.Add(gravestone.position.roundToPoint());
-			}
+			exit = floorTiles.Find(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_EXIT);
+			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
 		}
-
+		
 		public Vector2 TileToWorldPosition(Point tilePos) {
-			return mapComponent.tiledMap.tileToWorldPosition(tilePos) + new Vector2(8, -8);	
+			return mapComponent.tiledMap.tileToWorldPosition(tilePos) + new Vector2(8, 8);	
 		}
 
 		public Point WorldToTilePosition(Vector2 worldPos) {
@@ -65,6 +71,10 @@ namespace GravekeeperReboot.Source {
 
 		public Entity FindAtLocation(Point tilePos) {
 			return tileEntities.Find(e => e.getComponent<MoveComponent>().position == tilePos);
+		}
+
+		public bool GroundAtLocation(Point tilePosition) {
+			return mapComponent.getTileAtWorldPosition(tilePosition.ToVector2()) != null;
 		}
 	}
 }

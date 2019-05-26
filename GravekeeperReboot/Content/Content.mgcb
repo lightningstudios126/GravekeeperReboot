@@ -149,16 +149,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/Wall.png
 
-#begin Tilemaps/testmap.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Tilemaps/testmap.tmx
-
-#begin Tilemaps/testmap1.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Tilemaps/testmap1.tmx
-
 #begin Tilemaps/Testset-atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -175,4 +165,14 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:Tilemaps/map1-1.tmx
+
+#begin Tilemaps/map1-2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tilemaps/map1-2.tmx
+
+#begin Tilemaps/map2-2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Tilemaps/map2-2.tmx
 

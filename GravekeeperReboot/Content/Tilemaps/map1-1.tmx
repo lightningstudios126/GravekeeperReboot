@@ -1,38 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="46">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="59">
  <tileset firstgid="1" name="Testset" tilewidth="16" tileheight="16" tilecount="11" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
+  <tile id="0" type="Exit">
+   <properties>
+    <property name="TileName" value="Exit"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Exit.png"/>
   </tile>
-  <tile id="1">
+  <tile id="1" type="Full Gravestone">
+   <properties>
+    <property name="TileName" value="Full Gravestone"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Full Gravestone.png"/>
   </tile>
-  <tile id="2">
+  <tile id="2" type="Empty Gravestone">
+   <properties>
+    <property name="TileName" value="Empty Gravestone"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Gravestone.png"/>
   </tile>
-  <tile id="3">
+  <tile id="3" type="Ground">
+   <properties>
+    <property name="TileName" value="Ground"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Ground 1.png"/>
   </tile>
-  <tile id="4">
+  <tile id="4" type="Ground">
+   <properties>
+    <property name="TileName" value="Ground"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Ground 2.png"/>
   </tile>
-  <tile id="5">
+  <tile id="5" type="Ground">
+   <properties>
+    <property name="TileName" value="Ground"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Ground 3.png"/>
   </tile>
-  <tile id="6">
+  <tile id="6" type="Ground">
+   <properties>
+    <property name="TileName" value="Ground"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Ground.png"/>
   </tile>
-  <tile id="7">
+  <tile id="7" type="Block">
+   <properties>
+    <property name="TileName" value="Block"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Movable Wall.png"/>
   </tile>
-  <tile id="8">
+  <tile id="8" type="Wall">
+   <properties>
+    <property name="TileName" value="Wall"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Wall.png"/>
   </tile>
-  <tile id="9">
+  <tile id="9" type="Player">
+   <properties>
+    <property name="TileName" value="Player"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Player.png"/>
   </tile>
-  <tile id="10">
+  <tile id="10" type="Soul">
+   <properties>
+    <property name="TileName" value="Soul"/>
+   </properties>
    <image width="16" height="16" source="../Sprites/Tiles/Soul.png"/>
   </tile>
  </tileset>
@@ -40,21 +73,18 @@
   <data encoding="csv">
 0,0,0,0,0,
 0,0,5,0,0,
-0,6,6,0,0,
+0,5,5,0,0,
 0,7,3,1,0,
 0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="Spawns">
-  <object id="33" type="Player" gid="10" x="32" y="48" width="16" height="16"/>
-  <object id="34" type="Soul" gid="11" x="16" y="48" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="8" name="Markers" visible="0">
-  <object id="43" type="Exit" x="48" y="48">
-   <point/>
-  </object>
-  <object id="44" type="Gravestone" x="32" y="48">
-   <point/>
-  </object>
- </objectgroup>
+ <layer id="13" name="Entities" width="5" height="5" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,
+0,0,0,0,0,
+0,11,10,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+</data>
+ </layer>
 </map>

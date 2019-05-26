@@ -78,7 +78,8 @@
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
     <Compile Include="Source\Systems\RotateSystem.cs" />
-    <Compile Include="Source\TiledMapConstants.cs" />
+    <Compile Include="Source\Tiled\TiledMapConstants.cs" />
+    <Compile Include="Source\Tiled\GlobalTileset.cs" />
     <Compile Include="Source\Utilities\Directions.cs" />
     <Compile Include="Source\Utilities\TileDirection.cs" />
   </ItemGroup>

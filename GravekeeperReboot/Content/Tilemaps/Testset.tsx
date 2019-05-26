@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.3" name="Testset" tilewidth="16" tileheight="16" tilecount="11" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
- <tile id="0">
+ <tile id="0" type="Exit">
   <image width="16" height="16" source="../Sprites/Tiles/Exit.png"/>
  </tile>
- <tile id="1">
+ <tile id="1" type="Full Gravestone">
   <image width="16" height="16" source="../Sprites/Tiles/Full Gravestone.png"/>
  </tile>
- <tile id="2">
+ <tile id="2" type="Empty Gravestone">
   <image width="16" height="16" source="../Sprites/Tiles/Gravestone.png"/>
  </tile>
- <tile id="3">
+ <tile id="3" type="Ground">
   <image width="16" height="16" source="../Sprites/Tiles/Ground 1.png"/>
  </tile>
- <tile id="4">
+ <tile id="4" type="Ground">
   <image width="16" height="16" source="../Sprites/Tiles/Ground 2.png"/>
  </tile>
- <tile id="5">
+ <tile id="5" type="Ground">
   <image width="16" height="16" source="../Sprites/Tiles/Ground 3.png"/>
  </tile>
- <tile id="6">
+ <tile id="6" type="Ground">
   <image width="16" height="16" source="../Sprites/Tiles/Ground.png"/>
  </tile>
- <tile id="7">
+ <tile id="7" type="Block">
   <image width="16" height="16" source="../Sprites/Tiles/Movable Wall.png"/>
  </tile>
- <tile id="8">
+ <tile id="8" type="Wall">
   <image width="16" height="16" source="../Sprites/Tiles/Wall.png"/>
  </tile>
- <tile id="9">
+ <tile id="9" type="Player">
   <image width="16" height="16" source="../Sprites/Tiles/Player.png"/>
  </tile>
- <tile id="10">
+ <tile id="10" type="Soul">
   <image width="16" height="16" source="../Sprites/Tiles/Soul.png"/>
  </tile>
 </tileset>

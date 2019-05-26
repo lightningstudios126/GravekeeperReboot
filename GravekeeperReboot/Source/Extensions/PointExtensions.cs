@@ -8,7 +8,7 @@ namespace GravekeeperReboot.Source.Extensions {
 		}
 
 		public static Point Normalize(this Point point) {
-			return Vector2Ext.roundToPoint(Vector2.Normalize(new Vector2(point.X, point.Y)));
+			return Vector2.Normalize(new Vector2(point.X, point.Y)).roundToPoint();
 		}
 	}
 }
