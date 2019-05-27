@@ -2,6 +2,7 @@
 using GravekeeperReboot.Source.ActionMapping;
 using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Systems;
+using GravekeeperReboot.Source.Tiled;
 using Nez;
 
 namespace GravekeeperReboot.Scenes {
@@ -10,6 +11,8 @@ namespace GravekeeperReboot.Scenes {
 
 		public override void initialize() {
 			base.initialize();
+			TiledMapRebuilder.Rebuild();
+
 			addRenderer(new DefaultRenderer());
 		
 			addEntityProcessor(new CommandSystem());

@@ -9,6 +9,8 @@ namespace Nez
 		{
 			public static class Tiles
 			{
+				public const string block = @"Sprites\Tiles\Block";
+				public const string emptyGravestone = @"Sprites\Tiles\Empty Gravestone";
 				public const string exit = @"Sprites\Tiles\Exit";
 				public const string fullGravestone = @"Sprites\Tiles\Full Gravestone";
 				public const string gravestone = @"Sprites\Tiles\Gravestone";
@@ -26,6 +28,9 @@ namespace Nez
 
 		public static class Tilemaps
 		{
+			public const string map11 = @"Tilemaps\map1-1";
+			public const string map12 = @"Tilemaps\map1-2";
+			public const string map22 = @"Tilemaps\map2-2";
 			public const string testmap = @"Tilemaps\testmap";
 			public const string testmap1 = @"Tilemaps\testmap1";
 			public const string testsetatlas = @"Tilemaps\Testset-atlas";
