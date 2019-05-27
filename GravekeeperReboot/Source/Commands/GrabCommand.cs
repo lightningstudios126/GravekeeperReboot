@@ -10,7 +10,7 @@ namespace GravekeeperReboot.Source.Commands {
 		private Entity grabber;
 		private GrabComponent grabComponent;
 
-		public GrabCommand(Entity grabber, bool grab) {
+		public GrabCommand(Entity grabber) {
 			this.playerInitiated = false;
 
 			if (!grabber.HasComponent<GrabComponent>())
@@ -18,27 +18,24 @@ namespace GravekeeperReboot.Source.Commands {
 
 			this.grabber = grabber;
 			grabComponent = grabber.getComponent<GrabComponent>();
-			grabComponent.isGrabbing = !grab;
 		}
 
 		public override void Execute() {
-			if (!grabComponent.isGrabbing) {
-				GameBoard gameboard = grabber.scene.getSceneComponent<GameBoard>();
-				TileComponent tileComponent = grabber.getComponent<TileComponent>();
+			GameBoard gameboard = grabber.scene.getSceneComponent<GameBoard>();
+			TileComponent tileComponent = grabber.getComponent<TileComponent>();
 
-				Point checkPosition = tileComponent.tilePosition + Directions.DirectionPointOffset(tileComponent.tileDirection);
-				Entity checkedEntity = gameboard.FindAtLocation(checkPosition);
+			Point checkPosition = tileComponent.tilePosition + Directions.DirectionPointOffset(tileComponent.tileDirection);
+			Entity checkedEntity = gameboard.FindAtLocation(checkPosition);
 
-				if (checkedEntity != null && checkedEntity.HasComponent<ControlComponent>()) {
-					grabComponent.isGrabbing = true;
-					grabComponent.target = checkedEntity;
-				}
-			} else {
-				grabComponent.isGrabbing = false;
-				grabComponent.target = null;
+			if (checkedEntity != null && checkedEntity.HasComponent<ControlComponent>()) {
+				grabComponent.isGrabbing = true;
+				grabComponent.target = checkedEntity;
 			}
 		}
 
-		public override void Undo() { }
+		public override void Undo() {
+			grabComponent.isGrabbing = false;
+			grabComponent.target = null;
+		}
 	}
 }

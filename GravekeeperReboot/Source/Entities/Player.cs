@@ -14,7 +14,7 @@ namespace GravekeeperReboot.Source.Entities {
 
 			player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
 				.addComponent(new TileComponent())
-				.addComponent(new GrabComponent());
+				.addComponent(new GrabComponent() { isGrabbing = false });
 
             return player;
         }

@@ -60,9 +60,14 @@ namespace GravekeeperReboot.Source {
 			exit = floorTiles.Find(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_EXIT);
 			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
 		}
-		
+
+		public bool CanPush(Entity entity, Utilities.TileDirection direction) {
+			TileComponent entityTile = entity.getComponent<TileComponent>();
+			return FindAtLocation(entityTile.tilePosition + Utilities.Directions.DirectionPointOffset(direction)) == null;
+		}
+
 		public Vector2 TileToWorldPosition(Point tilePos) {
-			return mapComponent.tiledMap.tileToWorldPosition(tilePos) + new Vector2(8, 8);	
+			return mapComponent.tiledMap.tileToWorldPosition(tilePos) + new Vector2(8, 8);
 		}
 
 		public Point WorldToTilePosition(Vector2 worldPos) {

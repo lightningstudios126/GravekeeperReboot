@@ -9,8 +9,10 @@ namespace GravekeeperReboot.Source.Systems {
 		KeyBinding inputMap;
 
 		private Entity player;
-		private TileComponent tileComponent;
+		private TileComponent playerTile;
 		private GrabComponent grabComponent;
+
+		GameBoard gameBoard;
 
 		public InputSystem(KeyBinding inputMap) {
 			this.inputMap = inputMap;
@@ -20,21 +22,51 @@ namespace GravekeeperReboot.Source.Systems {
 			if (commandSystem == null) commandSystem = scene.getEntityProcessor<CommandSystem>();
 			if (player == null) {
 				player = scene.findEntity("Player");
-				tileComponent = player.getComponent<TileComponent>();
+				playerTile = player.getComponent<TileComponent>();
 				grabComponent = player.getComponent<GrabComponent>();
+				gameBoard = scene.getSceneComponent<GameBoard>();
 			}
 
-			if (Input.isKeyPressed(inputMap.UpButton))
-				commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset(tileComponent.tileDirection)));
-			if (Input.isKeyPressed(inputMap.LeftButton))
+			if (Input.isKeyPressed(inputMap.UpButton)) {
+				Utilities.TileDirection direction = playerTile.tileDirection;
+				if (!grabComponent.isGrabbing) {
+					Entity entityAhead = gameBoard.FindAtLocation(playerTile.tilePosition + Utilities.Directions.DirectionPointOffset(direction));
+					if (entityAhead == null || gameBoard.CanPush(entityAhead, direction)) {
+						commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset(direction)));
+						if (entityAhead != null) {
+							commandSystem.QueueCommand(new MoveCommand(entityAhead, Utilities.Directions.DirectionPointOffset(direction)) { playerInitiated = false });
+						}
+					}
+				} else if (gameBoard.CanPush(grabComponent.target, direction)) {
+					commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset(direction)));
+					commandSystem.QueueCommand(new MoveCommand(grabComponent.target, Utilities.Directions.DirectionPointOffset(direction)) { playerInitiated = false });
+				}
+			}
+
+			if (Input.isKeyPressed(inputMap.DownButton)) {
+				Utilities.TileDirection direction = Utilities.Directions.DirAdd(playerTile.tileDirection, Utilities.TileDirection.DOWN);
+				Entity entityAhead = gameBoard.FindAtLocation(playerTile.tilePosition + Utilities.Directions.DirectionPointOffset(direction));
+				if (entityAhead == null || gameBoard.CanPush(entityAhead, direction)) {
+					commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset(direction)));
+					if (grabComponent.isGrabbing) {
+						commandSystem.QueueCommand(new MoveCommand(grabComponent.target, Utilities.Directions.DirectionPointOffset(direction)) { playerInitiated = false });
+					}
+					if (entityAhead != null) {
+						commandSystem.QueueCommand(new MoveCommand(entityAhead, Utilities.Directions.DirectionPointOffset(direction)) { playerInitiated = false });
+					}
+				}
+			}
+			if (Input.isKeyPressed(inputMap.LeftButton)) {
 				commandSystem.QueueCommand(new RotateCommand(player, Utilities.TileDirection.LEFT));
-			if (Input.isKeyPressed(inputMap.DownButton))
-				commandSystem.QueueCommand(new MoveCommand(player, Utilities.Directions.DirectionPointOffset((Utilities.TileDirection)(((int)tileComponent.tileDirection + 2) % 4))));
-			if (Input.isKeyPressed(inputMap.RightButton))
+			}
+
+			if (Input.isKeyPressed(inputMap.RightButton)) {
 				commandSystem.QueueCommand(new RotateCommand(player, Utilities.TileDirection.RIGHT));
 
+			}
+
 			// "Toggle" grab
-			if (Input.isKeyPressed(inputMap.GrabButton)) Grab(!grabComponent.isGrabbing);
+			if (Input.isKeyPressed(inputMap.GrabButton)) Grab(grabComponent.isGrabbing);
 
 			// "Hold" grab 
 			//if (Input.isKeyPressed(inputMap.GrabButton)) Grab(true);
@@ -43,8 +75,11 @@ namespace GravekeeperReboot.Source.Systems {
 			if (Input.isKeyPressed(inputMap.UndoButton)) Undo();
 		}
 
-		public void Grab(bool grabbing) {
-			commandSystem.QueueCommand(new GrabCommand(player, grabbing));
+		public void Grab(bool currentlyGrabbing) {
+			if (currentlyGrabbing)
+				commandSystem.QueueCommand(new DropCommand(player));
+			else
+				commandSystem.QueueCommand(new GrabCommand(player));
 		}
 
 		public void Undo() {
