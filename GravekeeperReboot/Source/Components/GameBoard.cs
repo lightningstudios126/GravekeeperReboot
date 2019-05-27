@@ -42,7 +42,9 @@ namespace GravekeeperReboot.Source {
 		public void LoadLevel(string location) {
 			mapComponent.tiledMap = scene.content.Load<TiledMap>(location);
 
-			List<TiledTile> spawnTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_SPAWNS).tiles.ToList();
+			TiledTileLayer spawnLayer = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_SPAWNS);
+			spawnLayer.visible = false;
+			List<TiledTile> spawnTiles = spawnLayer.tiles.ToList();
 			spawnTiles.RemoveAll(t => t == null);
 
 			foreach (TiledTile tile in spawnTiles) {
