@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="5" height="5" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="27">
-  <tileset name="Testset" tilewidth="16" tileheight="16" tilecount="11" columns="5" firstgid="1">
+  <tileset firstgid="1" name="Testset" tilewidth="16" tileheight="16" tilecount="11" columns="5">
     <grid orientation="orthogonal" width="1" height="1" />
     <tile id="0" type="Exit">
       <properties>
