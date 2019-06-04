@@ -6,7 +6,7 @@ using Nez.Sprites;
 
 namespace GravekeeperReboot.Source.Entities {
     public sealed class Player : Prefab {
-		public override string Type => "Player";
+		public override string Type => Tiled.TiledMapConstants.TYPE_PLAYER;
 
 		public override Entity Instantiate (Scene scene, Vector2 position) {
 			Entity player = scene.createEntity(Type, position);
@@ -14,7 +14,8 @@ namespace GravekeeperReboot.Source.Entities {
 
 			player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
 				.addComponent(new TileComponent())
-				.addComponent(new GrabComponent() { isGrabbing = false });
+				.addComponent(new GrabComponent() { isGrabbing = false })
+				.addComponent(new PlayerMoveComponent());
 
             return player;
         }

@@ -61,9 +61,8 @@ namespace GravekeeperReboot.Source {
 			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
 		}
 
-		public bool CanPush(Entity entity, Utilities.TileDirection direction) {
-			TileComponent entityTile = entity.getComponent<TileComponent>();
-			return FindAtLocation(entityTile.tilePosition + Utilities.Directions.DirectionPointOffset(direction)) == null;
+		public bool CanPush(TileComponent tile, Utilities.TileDirection direction) {
+			return FindAtLocation(tile.tilePosition + Utilities.Directions.DirectionPointOffset(direction)) == null;
 		}
 
 		public Vector2 TileToWorldPosition(Point tilePos) {

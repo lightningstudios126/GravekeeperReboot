@@ -60,6 +60,7 @@
     <Compile Include="Source\Components\ControlComponent.cs" />
     <Compile Include="Source\Components\GrabComponent.cs" />
     <Compile Include="Source\Components\GameBoard.cs" />
+    <Compile Include="Source\Components\PlayerMoveComponent.cs" />
     <Compile Include="Source\Components\TileComponent.cs" />
     <Compile Include="Source\Entities\Block.cs" />
     <Compile Include="Source\Extensions\EntityExtensions.cs" />

@@ -6,7 +6,7 @@ using Nez.Sprites;
 
 namespace GravekeeperReboot.Source.Entities {
 	public class Block : Prefab {
-		public override string Type => "Block";
+		public override string Type => Tiled.TiledMapConstants.TYPE_BLOCK;
 
 		public override Entity Instantiate(Scene scene, Vector2 position) {
 			Entity block = scene.createEntity(Type, position);
