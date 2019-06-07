@@ -1,7 +1,6 @@
 ﻿namespace GravekeeperReboot.Source.Commands {
-	public class Command {
-		public bool playerInitiated = true;
-		public virtual void Execute() { }
-		public virtual void Undo() { }
+	public abstract class Command {
+		public abstract void Execute();
+		public abstract void Undo();
     }
 }

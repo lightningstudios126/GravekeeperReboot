@@ -28,8 +28,11 @@ namespace GravekeeperReboot.Scenes {
 			camera.setPosition(gameBoard.Center);
 			camera.zoomIn(10);
 			PlayerMoveComponent playerMove = findEntity(TiledMapConstants.TYPE_PLAYER).getComponent<PlayerMoveComponent>();
+			CommandSystem command = getEntityProcessor<CommandSystem>();
 			InputSystem input = getEntityProcessor<InputSystem>();
 			BindPlayerControls(input, playerMove);
+			input.OnPressUndo += command.UndoTurn;
+			playerMove.OnPlayerAction += command.StartNewTurn;
 		}
 
 		public override void update() {

@@ -42,11 +42,7 @@ namespace GravekeeperReboot.Source.Systems {
 			//if (Input.isKeyPressed(inputMap.GrabButton)) Grab(true);
 			//if (Input.isKeyReleased(inputMap.GrabButton)) Grab(false);
 
-			if (Input.isKeyPressed(inputMap.UndoButton)) Undo();
-		}
-
-		public void Undo() {
-			commandSystem.QueueCommand(new UndoCommand());
+			if (Input.isKeyPressed(inputMap.UndoButton)) OnPressUndo();
 		}
 	}
 }

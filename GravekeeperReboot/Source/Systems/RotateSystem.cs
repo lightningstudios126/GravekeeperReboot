@@ -38,14 +38,11 @@ namespace GravekeeperReboot.Source.Systems {
 
 			// Move target to grabber's position
 			Point offset = Vector2.Normalize(entity.position - target.position).roundToPoint();
-			// Pushe target out in the direction grabber is facing
+			// Push target out in the direction grabber is facing
 			Point playerDirection = Directions.DirectionPointOffset(entityTileComponent.tileDirection);
 
 			CommandSystem commandSystem = scene.getEntityProcessor<CommandSystem>();
-			commandSystem.QueueCommand(
-				new MoveCommand(grabComponent.target, offset) { playerInitiated = false },
-				new MoveCommand(grabComponent.target, playerDirection) { playerInitiated = false }
-			);
+			commandSystem.QueueCommand(new MoveCommand(grabComponent.target, offset + playerDirection));
 		}
 	}
 }

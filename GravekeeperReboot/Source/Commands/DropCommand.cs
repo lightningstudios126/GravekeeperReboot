@@ -1,13 +1,8 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Extensions;
-using GravekeeperReboot.Source.Utilities;
-using Microsoft.Xna.Framework;
 using Nez;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GravekeeperReboot.Source.Commands {
 	public class DropCommand : Command {
@@ -17,8 +12,6 @@ namespace GravekeeperReboot.Source.Commands {
 		private Entity heldEntity;
 
 		public DropCommand(Entity grabber) {
-			this.playerInitiated = false;
-
 			if (!grabber.HasComponent<GrabComponent>())
 				throw new ArgumentException("Grabber does not have a GrabComponent attached!");
 

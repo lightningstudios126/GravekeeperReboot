@@ -57,6 +57,7 @@
     <Compile Include="Source\Commands\DropCommand.cs" />
     <Compile Include="Source\Commands\GrabCommand.cs" />
     <Compile Include="Source\Commands\RotateCommand.cs" />
+    <Compile Include="Source\Commands\TurnCommand.cs" />
     <Compile Include="Source\Components\ControlComponent.cs" />
     <Compile Include="Source\Components\GrabComponent.cs" />
     <Compile Include="Source\Components\GameBoard.cs" />

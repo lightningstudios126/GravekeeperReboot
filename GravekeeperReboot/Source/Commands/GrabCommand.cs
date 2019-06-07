@@ -11,8 +11,6 @@ namespace GravekeeperReboot.Source.Commands {
 		private GrabComponent grabComponent;
 
 		public GrabCommand(Entity grabber) {
-			this.playerInitiated = false;
-
 			if (!grabber.HasComponent<GrabComponent>())
 				throw new ArgumentException("Grabber does not have a GrabComponent attached!");
 
