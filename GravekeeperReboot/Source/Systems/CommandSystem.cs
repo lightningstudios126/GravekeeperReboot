@@ -16,7 +16,7 @@ namespace GravekeeperReboot.Source.Systems {
 		}
 
 		public void QueueCommand(Command command) {
-			System.Console.WriteLine("queued:" + command.GetType().Name);
+			System.Console.WriteLine("queued: " + command.GetType().Name);
 			commandBuffer.Enqueue(command);
 		}
 
@@ -33,9 +33,7 @@ namespace GravekeeperReboot.Source.Systems {
 					if (commandsExecuted.Count > 0) {
 						// undo commands until it reaches the beginning of the turn
 						while (commandsExecuted.Count > 0 && !(commandsExecuted.Peek() is TurnCommand)) {
-							Command toundo = commandsExecuted.Pop();
-							System.Console.WriteLine("undid: " + toundo);
-							toundo.Undo();
+							commandsExecuted.Pop().Undo();
 						}
 
 						commandsExecuted.Pop();

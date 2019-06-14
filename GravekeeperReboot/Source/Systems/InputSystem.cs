@@ -19,7 +19,7 @@ namespace GravekeeperReboot.Source.Systems {
 			this.inputMap = inputMap;
 		}
 
-		public event Action OnPressUp, OnPressDown, OnPressLeft, OnPressRight, OnPressGrab, OnPressUndo;
+		public event Action OnInput, OnPressUp, OnPressDown, OnPressLeft, OnPressRight, OnPressGrab, OnPressUndo;
 
 		public override void process() {
 			if (commandSystem == null) commandSystem = scene.getEntityProcessor<CommandSystem>();
@@ -30,19 +30,37 @@ namespace GravekeeperReboot.Source.Systems {
 				gameBoard = scene.getSceneComponent<GameBoard>();
 			}
 
-			if (Input.isKeyPressed(inputMap.UpButton)) OnPressUp();
-			if (Input.isKeyPressed(inputMap.DownButton)) OnPressDown();
-			if (Input.isKeyPressed(inputMap.LeftButton)) OnPressLeft();
-			if (Input.isKeyPressed(inputMap.RightButton)) OnPressRight();
-			
+			if (Input.isKeyPressed(inputMap.UpButton)) {
+				OnPressUp();
+				OnInput();
+			}
+			if (Input.isKeyPressed(inputMap.DownButton)) {
+				OnPressDown();
+				OnInput();
+			}
+			if (Input.isKeyPressed(inputMap.LeftButton)) {
+				OnPressLeft();
+				OnInput();
+			}
+			if (Input.isKeyPressed(inputMap.RightButton)) {
+				OnPressRight();
+				OnInput();
+			}
+
 			// "Toggle" grab
-			if (Input.isKeyPressed(inputMap.GrabButton)) OnPressGrab();
+			if (Input.isKeyPressed(inputMap.GrabButton)) {
+				OnPressGrab();
+				OnInput();
+			}
 
 			// "Hold" grab 
 			//if (Input.isKeyPressed(inputMap.GrabButton)) Grab(true);
 			//if (Input.isKeyReleased(inputMap.GrabButton)) Grab(false);
 
-			if (Input.isKeyPressed(inputMap.UndoButton)) OnPressUndo();
+			if (Input.isKeyPressed(inputMap.UndoButton)) {
+				OnPressUndo();
+				OnInput();
+			}
 		}
 	}
 }

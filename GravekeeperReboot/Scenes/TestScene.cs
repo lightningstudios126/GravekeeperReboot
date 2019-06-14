@@ -17,7 +17,7 @@ namespace GravekeeperReboot.Scenes {
 		
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(new ArrowKeyBinding())); 
-			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(TileComponent))));
+			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(TileComponent), typeof(AnimationComponent))));
 			addEntityProcessor(new RotateSystem(new Matcher().all(typeof(TileComponent))));
 			gameBoard = addSceneComponent(new GameBoard());
 		}
@@ -30,9 +30,12 @@ namespace GravekeeperReboot.Scenes {
 			PlayerMoveComponent playerMove = findEntity(TiledMapConstants.TYPE_PLAYER).getComponent<PlayerMoveComponent>();
 			CommandSystem command = getEntityProcessor<CommandSystem>();
 			InputSystem input = getEntityProcessor<InputSystem>();
+			MoveSystem move = getEntityProcessor<MoveSystem>();
 			BindPlayerControls(input, playerMove);
 			input.OnPressUndo += command.UndoTurn;
 			playerMove.OnPlayerAction += command.StartNewTurn;
+			input.OnInput += move.InterruptAnimation;
+			
 		}
 
 		public override void update() {

@@ -7,25 +7,40 @@ using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
 	class MoveSystem : EntitySystem {
-		GameBoard gameBoard;
+		private InputSystem input;
 
-        public MoveSystem(Matcher matcher) : base(matcher) {}
+		GameBoard gameBoard;
+		float timePassed = 0.0f;
+		float turnLength = 0.2f;
+		bool IsAnimating => timePassed > 0;
+
+		public MoveSystem(Matcher matcher) : base(matcher) {}
 
         protected override void process(List<Entity> entities) {
             base.process(entities);
 			if (gameBoard == null) gameBoard = scene.getSceneComponent<GameBoard>();
+			if (input == null) input = scene.getEntityProcessor<InputSystem>();
 
-            foreach(Entity entity in entities) {
-                TileComponent tileComponent = entity.getComponent<TileComponent>();
-				Vector2 targetPosition = gameBoard.TileToWorldPosition(tileComponent.tilePosition);
-				if (entity.position != targetPosition) {
-					entity.position = targetPosition;
+			if (entities.Count > 0) {
+				timePassed += Time.deltaTime;
 
-					GrabComponent grabComponent = entity.getComponent<GrabComponent>();
-					//if (grabComponent != null && grabComponent.isGrabbing && grabComponent.target != null)
-					//	ManipulateEntity(entity);
+				foreach (Entity entity in entities) {
+					entity.getComponent<AnimationComponent>().animation(timePassed / turnLength);
 				}
-            }
-        }
+
+				if (timePassed >= turnLength) {
+					timePassed = 0;
+					foreach (Entity entity in entities) {
+						entity.removeComponent<AnimationComponent>();
+					}
+				}
+			}
+		}
+
+		public void InterruptAnimation() {
+			if (IsAnimating) {
+				timePassed = turnLength;
+			}
+		}
 	}
 }
