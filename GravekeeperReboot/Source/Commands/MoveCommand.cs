@@ -26,12 +26,12 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Undo() {
 			entityTile.tilePosition -= offset;
-			entity.position -= offset.ToVector2() * 16;
+			entity.position -= offset.ToVector2() * Tiled.TiledMapConstants.TILESIZE;
 		}
 
 		private void Animation(float progress) {
 			GameBoard gameBoard = entity.scene.getSceneComponent<GameBoard>();
-			entity.position = gameBoard.TileToWorldPosition(entityTile.tilePosition - offset) + progress * (gameBoard.TileToWorldPosition(offset) - new Vector2(8, 8));
+			entity.position = ((entityTile.tilePosition - offset).ToVector2() + progress * offset.ToVector2() + new Vector2(0.5f, 0.5f)) * Tiled.TiledMapConstants.TILESIZE;
 		}
 	}
 }

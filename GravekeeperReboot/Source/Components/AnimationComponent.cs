@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 namespace GravekeeperReboot.Source.Components {
 	class AnimationComponent : Component {
-
-
 		public delegate void Animation(float progress);
 		public Animation animation;
 	}
