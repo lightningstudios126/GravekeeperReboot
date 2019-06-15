@@ -29,7 +29,7 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Undo() {
 			entityTile.tilePosition = initialPosition;
-			entity.position -= (finalPosition - initialPosition).ToVector2() * 16;
+			entity.position -= (finalPosition - initialPosition).ToVector2() * Tiled.TiledMapConstants.TILESIZE;
 		}
 
 		private void Animation(float progress) {
