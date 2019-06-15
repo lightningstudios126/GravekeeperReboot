@@ -18,7 +18,7 @@ namespace GravekeeperReboot.Source.Components {
 			this.tilePosition = tilePosition;
 
 			entity.position = board.TileToWorldPosition(tilePosition);
-			entity.rotation = Directions.DirectionDegrees(direction);
+			entity.rotationDegrees = Directions.DirectionDegrees(direction) - 90;
 		}
 	}
 }
