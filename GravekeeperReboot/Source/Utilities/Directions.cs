@@ -7,7 +7,7 @@ namespace GravekeeperReboot.Source.Utilities {
 		/// </summary>
 		/// <param name="d"></param>
 		/// <returns></returns>
-		public static Point DirectionPointOffset(TileDirection d) {
+		public static Point Offset(TileDirection d) {
 			switch (d) {
 				case TileDirection.RIGHT:
 					return new Point(1, 0);
@@ -43,5 +43,4 @@ namespace GravekeeperReboot.Source.Utilities {
 			return (TileDirection)(((int)a + (int)b) % 4);
 		}
 	}
-
 }

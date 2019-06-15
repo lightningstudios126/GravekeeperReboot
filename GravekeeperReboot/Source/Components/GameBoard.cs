@@ -2,6 +2,7 @@
 using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Tiled;
+using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;
@@ -61,8 +62,17 @@ namespace GravekeeperReboot.Source {
 			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
 		}
 
-		public bool CanPush(TileComponent tile, Utilities.TileDirection direction) {
-			return FindAtLocation(tile.tilePosition + Utilities.Directions.DirectionPointOffset(direction)) == null;
+		public bool CanPush(TileComponent tile, TileDirection direction) {
+			return EmptyAtLocation(tile.tilePosition + Directions.Offset(direction));
+		}
+
+		public bool CanRotate(TileComponent tile, TileComponent pivot, TileDirection direction) {
+			var offset = Directions.Offset(Directions.DirAdd(pivot.tileDirection, direction));
+
+			var targetPosition = EmptyAtLocation(pivot.tilePosition + offset);
+			var block = EmptyAtLocation(tile.tilePosition + offset);
+
+			return targetPosition && block;
 		}
 
 		public Vector2 TileToWorldPosition(Point tilePos) {
@@ -75,6 +85,10 @@ namespace GravekeeperReboot.Source {
 
 		public Entity FindAtLocation(Point tilePos) {
 			return tileEntities.Find(e => e.getComponent<TileComponent>().tilePosition == tilePos);
+		}
+
+		public bool EmptyAtLocation(Point tilePos) {
+			return FindAtLocation(tilePos) == null;
 		}
 
 		public bool GroundAtLocation(Point tilePosition) {

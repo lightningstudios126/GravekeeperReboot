@@ -1,17 +1,15 @@
-﻿using GravekeeperReboot.Source.Commands;
-using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.Extensions;
-using Microsoft.Xna.Framework;
+﻿using GravekeeperReboot.Source.Components;
 using Nez;
 using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Systems {
 	class MoveSystem : EntitySystem {
 		private InputSystem input;
+		private GameBoard gameBoard;
 
-		GameBoard gameBoard;
-		float timePassed = 0.0f;
-		float turnLength = 0.2f;
+		private float timePassed = 0.0f;
+		private const float turnLength = 0.2f;
+
 		bool IsAnimating => timePassed > 0;
 
 		public MoveSystem(Matcher matcher) : base(matcher) {}
@@ -30,9 +28,7 @@ namespace GravekeeperReboot.Source.Systems {
 
 				if (timePassed >= turnLength) {
 					timePassed = 0;
-					foreach (Entity entity in entities) {
-						entity.removeComponent<AnimationComponent>();
-					}
+					entities.ForEach(e => e.removeComponent<AnimationComponent>());
 				}
 			}
 		}

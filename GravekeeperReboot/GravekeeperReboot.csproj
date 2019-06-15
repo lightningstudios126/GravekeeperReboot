@@ -56,6 +56,7 @@
     <Compile Include="Source\ActionMapping\WASDKeyBinding.cs" />
     <Compile Include="Source\Commands\DropCommand.cs" />
     <Compile Include="Source\Commands\GrabCommand.cs" />
+    <Compile Include="Source\Commands\PivotCommand.cs" />
     <Compile Include="Source\Commands\RotateCommand.cs" />
     <Compile Include="Source\Commands\TurnCommand.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Source\Systems\CommandSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
-    <Compile Include="Source\Systems\RotateSystem.cs" />
     <Compile Include="Source\Tiled\TiledMapConstants.cs" />
     <Compile Include="Source\Tiled\TiledMapRebuilder.cs" />
     <Compile Include="Source\Utilities\Directions.cs" />

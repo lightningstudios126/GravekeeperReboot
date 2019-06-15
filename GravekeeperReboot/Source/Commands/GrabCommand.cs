@@ -22,7 +22,7 @@ namespace GravekeeperReboot.Source.Commands {
 			GameBoard gameboard = grabber.scene.getSceneComponent<GameBoard>();
 			TileComponent tileComponent = grabber.getComponent<TileComponent>();
 
-			Point checkPosition = tileComponent.tilePosition + Directions.DirectionPointOffset(tileComponent.tileDirection);
+			Point checkPosition = tileComponent.tilePosition + Directions.Offset(tileComponent.tileDirection);
 			Entity checkedEntity = gameboard.FindAtLocation(checkPosition);
 
 			if (checkedEntity != null && checkedEntity.HasComponent<ControlComponent>()) {

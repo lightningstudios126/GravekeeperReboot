@@ -1,25 +1,32 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 
 namespace GravekeeperReboot.Source.Commands {
-	public class MoveCommand : Command {
+	public class PivotCommand : Command {
 		private Entity entity;
 		private Point initialPosition;
 		private Point finalPosition;
 
 		private TileComponent entityTile;
 
-		public MoveCommand(Entity entity, Point offset) {
+		public PivotCommand(Entity entity, Entity pivot, TileDirection offset) {
 			if (!entity.HasComponent<TileComponent>())
 				throw new System.ArgumentException("Target does not have a TileComponent attached!");
 
 			this.entity = entity;
 			entityTile = entity.getComponent<TileComponent>();
 
+			var pivotTile = pivot.getComponent<TileComponent>();
+
 			initialPosition = entityTile.tilePosition;
-			finalPosition = entityTile.tilePosition + offset;
+
+			var pivotOffset = pivotTile.tilePosition - entityTile.tilePosition;
+			var pivotDirection = Directions.Offset(Directions.DirAdd(pivotTile.tileDirection, offset));
+
+			finalPosition = initialPosition + pivotOffset + pivotDirection;
 		}
 
 		public override void Execute() {
