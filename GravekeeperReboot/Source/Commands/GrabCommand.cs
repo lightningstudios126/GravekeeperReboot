@@ -1,7 +1,6 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
-using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -21,7 +20,7 @@ namespace GravekeeperReboot.Source.Commands {
 		public override void Execute() {
 			GameBoard gameboard = this.grabber.scene.getSceneComponent<GameBoard>();
 
-			Point checkPosition = grabber.tilePosition + Directions.Offset(grabber.tileDirection);
+			Point checkPosition = grabber.tilePosition + grabber.tileDirection.Offset();
 			TileEntity checkedEntity = gameboard.FindAtLocation(checkPosition);
 
 			if (checkedEntity != null && checkedEntity.movability.HasFlag(MovabilityFlags.Grabbable)) {

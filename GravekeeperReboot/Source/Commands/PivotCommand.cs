@@ -1,5 +1,6 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
+using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 
@@ -17,7 +18,7 @@ namespace GravekeeperReboot.Source.Commands {
 			initialPosition = entity.tilePosition;
 
 			var pivotOffset = pivot - entity.tilePosition;
-			var pivotDirection = Directions.Offset(Directions.DirAdd(Directions.OffsetDirection(entity.tilePosition - pivot), direction));
+			var pivotDirection = Directions.OffsetDirection(entity.tilePosition - pivot).Add(direction).Offset();
 
 			finalPosition = initialPosition + pivotOffset + pivotDirection;
 		}

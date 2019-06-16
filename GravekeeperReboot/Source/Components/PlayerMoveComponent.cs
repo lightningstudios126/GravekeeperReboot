@@ -1,5 +1,6 @@
 ﻿using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Entities;
+using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Systems;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
@@ -33,20 +34,20 @@ namespace GravekeeperReboot.Source.Components {
 
 			TileDirection direction = entity.tileDirection;
 			if (!playerGrab.isGrabbing) {
-				TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + Directions.Offset(direction));
+				TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 
 				if (entityAhead == null || entityAhead.CanPush(direction)) {
-					MoveEntity(entity, Directions.Offset(direction));
+					MoveEntity(entity, direction.Offset());
 
 					if (entityAhead != null)
-						MoveEntity(entityAhead, Directions.Offset(direction));
+						MoveEntity(entityAhead, direction.Offset());
 				}
 			} else {
-				TileEntity entityAhead = gameBoard.FindAtLocation(playerGrab.target.tilePosition + Directions.Offset(direction));
+				TileEntity entityAhead = gameBoard.FindAtLocation(playerGrab.target.tilePosition + direction.Offset());
 				if (entityAhead == null || entityAhead.CanPush(direction)) {
-					MoveEntity(entity, Directions.Offset(direction));
-					MoveEntity(playerGrab.target, Directions.Offset(direction));
-					if (entityAhead != null) MoveEntity(entityAhead, Directions.Offset(direction));
+					MoveEntity(entity, direction.Offset());
+					MoveEntity(playerGrab.target, direction.Offset());
+					if (entityAhead != null) MoveEntity(entityAhead, direction.Offset());
 				}
 			}
 		}
@@ -54,14 +55,14 @@ namespace GravekeeperReboot.Source.Components {
 		public void OnPressDown() {
 			OnPlayerAction();
 
-			TileDirection direction = Directions.DirAdd(entity.tileDirection, TileDirection.DOWN);
-			TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + Directions.Offset(direction));
+			TileDirection direction = entity.tileDirection.Add(TileDirection.DOWN);
+			TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 
 			if (entityAhead == null || entityAhead.CanPush(direction)) {
-				MoveEntity(entity, Directions.Offset(direction));
+				MoveEntity(entity, direction.Offset());
 
-				if (playerGrab.isGrabbing) MoveEntity(playerGrab.target, Directions.Offset(direction));
-				if (entityAhead != null) MoveEntity(entityAhead, Directions.Offset(direction));
+				if (playerGrab.isGrabbing) MoveEntity(playerGrab.target, direction.Offset());
+				if (entityAhead != null) MoveEntity(entityAhead, direction.Offset());
 			}
 		}
 
@@ -86,7 +87,7 @@ namespace GravekeeperReboot.Source.Components {
 				throw new ArgumentOutOfRangeException("Direction is not left or right");
 
 			// Rotate the direction left or right
-			var newDirection = Directions.DirAdd(entity.tileDirection, direction);
+			var newDirection = entity.tileDirection.Add(direction);
 
 			if (!playerGrab.isGrabbing) {
 				// Rotate just the player

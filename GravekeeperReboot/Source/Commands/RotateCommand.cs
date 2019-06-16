@@ -1,5 +1,6 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
+using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Nez;
 using System;
@@ -14,7 +15,7 @@ namespace GravekeeperReboot.Source.Commands {
 			this.entity = entity;
 
 			this.initialDirection = entity.tileDirection;
-			this.finalDirection = Directions.DirAdd(entity.tileDirection, offset);
+			this.finalDirection = entity.tileDirection.Add(offset);
 		}
 
 		public override void Execute() {
@@ -24,12 +25,12 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Undo() {
 			entity.tileDirection = initialDirection;
-			entity.rotationDegrees = Directions.DirectionDegrees(initialDirection);
+			entity.rotationDegrees = initialDirection.DirectionDegrees();
 		}
 
 		private void Animation(float progress) {
-			var initial = Directions.DirectionDegrees(initialDirection);
-			var final = Directions.DirectionDegrees(finalDirection);
+			var initial = initialDirection.DirectionDegrees();
+			var final = finalDirection.DirectionDegrees();
 
 			var offset = progress * (final - initial);
 

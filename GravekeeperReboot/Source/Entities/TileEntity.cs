@@ -1,4 +1,5 @@
-﻿using GravekeeperReboot.Source.Utilities;
+﻿using GravekeeperReboot.Source.Extensions;
+using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
@@ -43,7 +44,7 @@ namespace GravekeeperReboot.Source.Entities {
 		public bool CanPush(TileDirection direction) {
 			if (!movability.HasFlag(MovabilityFlags.Pushable)) return false;
 			if (gameBoard != null) {
-				return gameBoard.EmptyAtLocation(tilePosition + Directions.Offset(direction));
+				return gameBoard.EmptyAtLocation(tilePosition + direction.Offset());
 			}
 			return false;
 		}
@@ -63,7 +64,7 @@ namespace GravekeeperReboot.Source.Entities {
 			if (gameBoard == null) return false;
 			if (!movability.HasFlag(MovabilityFlags.Pivotable)) return false;
 
-			var offset = Directions.Offset(Directions.DirAdd(Directions.OffsetDirection(tilePosition-pivot), direction));
+			var offset = Directions.OffsetDirection(tilePosition-pivot).Add(direction).Offset();
 
 			// Check that a 1x2 area is free in the direction of the pivot
 			bool targetPosition = gameBoard.EmptyAtLocation(pivot + offset);
