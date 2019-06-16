@@ -3,7 +3,6 @@ using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
-using Nez;
 using System;
 
 namespace GravekeeperReboot.Source.Commands {
@@ -25,7 +24,7 @@ namespace GravekeeperReboot.Source.Commands {
 			Point checkPosition = grabber.tilePosition + Directions.Offset(grabber.tileDirection);
 			TileEntity checkedEntity = gameboard.FindAtLocation(checkPosition);
 
-			if (checkedEntity != null && checkedEntity.movability.HasFlag(TileEntity.MovabilityFlags.Grabbable)) {
+			if (checkedEntity != null && checkedEntity.movability.HasFlag(MovabilityFlags.Grabbable)) {
 				grabComponent.isGrabbing = true;
 				grabComponent.target = checkedEntity;
 			}

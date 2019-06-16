@@ -1,8 +1,6 @@
-﻿using GravekeeperReboot.Source.Components;
-using GravekeeperReboot.Source.Entities;
+﻿using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Tiled;
-using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;

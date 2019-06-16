@@ -1,5 +1,4 @@
-﻿using GravekeeperReboot.Source.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
@@ -15,7 +14,7 @@ namespace GravekeeperReboot.Source.Entities {
 			entity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.soul)));
 
 			entity.tilePosition = position;
-			entity.movability = TileEntity.MovabilityFlags.Grabbable | TileEntity.MovabilityFlags.Pushable | TileEntity.MovabilityFlags.Pivotable;
+			entity.movability = MovabilityFlags.Grabbable | MovabilityFlags.Pushable | MovabilityFlags.Pivotable;
 		}
 	}
 }

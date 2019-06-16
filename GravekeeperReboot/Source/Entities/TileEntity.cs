@@ -2,23 +2,9 @@
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GravekeeperReboot.Source.Entities {
 	public class TileEntity : Entity {
-		/// <summary>
-		/// flag enum that defines what movement operations this entity can undergo.
-		/// </summary>
-		[Flags]
-		public enum MovabilityFlags {
-			Grabbable = 1 << 0,
-			Pushable = 1 << 1,
-			Pivotable = 1 << 2
-		}
-		
 		/// <summary>
 		/// position of this entity in grid space. This might not match exactly with the equivalent world position due to animation
 		/// </summary>
@@ -79,8 +65,9 @@ namespace GravekeeperReboot.Source.Entities {
 
 			var offset = Directions.Offset(Directions.DirAdd(Directions.OffsetDirection(tilePosition-pivot), direction));
 
-			var targetPosition = gameBoard.EmptyAtLocation(pivot + offset);
-			var block = gameBoard.EmptyAtLocation(tilePosition + offset);
+			// Check that a 1x2 area is free in the direction of the pivot
+			bool targetPosition = gameBoard.EmptyAtLocation(pivot + offset);
+			bool block = gameBoard.EmptyAtLocation(tilePosition + offset);
 
 			return targetPosition && block;
 		}

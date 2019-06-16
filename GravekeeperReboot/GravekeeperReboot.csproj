@@ -64,6 +64,7 @@
     <Compile Include="Source\Components\GameBoard.cs" />
     <Compile Include="Source\Components\PlayerMoveComponent.cs" />
     <Compile Include="Source\Entities\Block.cs" />
+    <Compile Include="Source\Entities\MovabilityFlags.cs" />
     <Compile Include="Source\Entities\TileEntity.cs" />
     <Compile Include="Source\Extensions\EntityExtensions.cs" />
     <Compile Include="Source\Entities\Player.cs" />

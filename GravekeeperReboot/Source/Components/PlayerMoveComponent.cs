@@ -44,7 +44,6 @@ namespace GravekeeperReboot.Source.Components {
 			} else {
 				TileEntity entityAhead = gameBoard.FindAtLocation(playerGrab.target.tilePosition + Directions.Offset(direction));
 				if (entityAhead == null || entityAhead.CanPush(direction)) {
-					// Move the player as well as it's target
 					MoveEntity(entity, Directions.Offset(direction));
 					MoveEntity(playerGrab.target, Directions.Offset(direction));
 					if (entityAhead != null) MoveEntity(entityAhead, Directions.Offset(direction));
@@ -68,34 +67,35 @@ namespace GravekeeperReboot.Source.Components {
 
 		public void OnPressLeft() {
 			OnPlayerAction();
-
-			var newDirection = Directions.DirAdd(entity.tileDirection, TileDirection.LEFT);
-
-			if (!playerGrab.isGrabbing) {
-				RotateEntity(entity, TileDirection.LEFT);
-			} else if (playerGrab.target.CanPivot(entity.tilePosition, TileDirection.LEFT)) {
-				RotateEntity(entity, TileDirection.LEFT);
-				PivotEntity(playerGrab.target, entity.tilePosition, TileDirection.LEFT);
-			}
+			RotatePlayer(TileDirection.LEFT);
 		}
 
 		public void OnPressRight() {
 			OnPlayerAction();
-
-			var newDirection = Directions.DirAdd(entity.tileDirection, TileDirection.RIGHT);
-
-			if (!playerGrab.isGrabbing) {
-				RotateEntity(entity, TileDirection.RIGHT);
-			} else if (playerGrab.target.CanPivot(entity.tilePosition, TileDirection.RIGHT)) {
-				RotateEntity(entity, TileDirection.RIGHT);
-				PivotEntity(playerGrab.target, entity.tilePosition, TileDirection.RIGHT);
-			}
+			RotatePlayer(TileDirection.RIGHT);
 		}
 
 		public void OnPressGrab() {
 			OnPlayerAction();
 			if (playerGrab.isGrabbing) commandSystem.QueueCommand(new DropCommand(entity));
 			else commandSystem.QueueCommand(new GrabCommand(entity));
+		}
+
+		private void RotatePlayer(TileDirection direction) {
+			if (direction != TileDirection.LEFT && direction != TileDirection.RIGHT)
+				throw new ArgumentOutOfRangeException("Direction is not left or right");
+
+			// Rotate the direction left or right
+			var newDirection = Directions.DirAdd(entity.tileDirection, direction);
+
+			if (!playerGrab.isGrabbing) {
+				// Rotate just the player
+				RotateEntity(entity, direction);
+			} else if (playerGrab.target.CanPivot(entity.tilePosition, direction)) {
+				// Rotate the player and pivot the entity it's grabbing
+				RotateEntity(entity, direction);
+				PivotEntity(playerGrab.target, entity.tilePosition, direction);
+			}
 		}
 
 		private void MoveEntity(TileEntity entity, Point offset) {

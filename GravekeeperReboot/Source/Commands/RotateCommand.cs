@@ -1,6 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
-using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Nez;
 using System;
