@@ -1,6 +1,7 @@
 ﻿using GravekeeperReboot.Source.ActionMapping;
 using GravekeeperReboot.Source.Commands;
 using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using Nez;
 using System;
 
@@ -8,12 +9,6 @@ namespace GravekeeperReboot.Source.Systems {
 	public class InputSystem : ProcessingSystem {
 		private CommandSystem commandSystem;
 		KeyBinding inputMap;
-
-		private Entity player;
-		private TileComponent playerTile;
-		private GrabComponent grabComponent;
-
-		GameBoard gameBoard;
 
 		public InputSystem(KeyBinding inputMap) {
 			this.inputMap = inputMap;
@@ -23,12 +18,6 @@ namespace GravekeeperReboot.Source.Systems {
 
 		public override void process() {
 			if (commandSystem == null) commandSystem = scene.getEntityProcessor<CommandSystem>();
-			if (player == null) {
-				player = scene.findEntity("Player");
-				playerTile = player.getComponent<TileComponent>();
-				grabComponent = player.getComponent<GrabComponent>();
-				gameBoard = scene.getSceneComponent<GameBoard>();
-			}
 
 			if (Input.isKeyPressed(inputMap.UpButton)) {
 				OnPressUp();

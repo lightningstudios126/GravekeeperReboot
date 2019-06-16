@@ -17,8 +17,12 @@ namespace GravekeeperReboot.Scenes {
 		
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(new ArrowKeyBinding())); 
-			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(TileComponent), typeof(AnimationComponent))));
+			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(AnimationComponent))));
 			gameBoard = addSceneComponent(new GameBoard());
+
+			for(int i = 0; i < 360; i++) {
+				System.Console.WriteLine(i+ ":" + Source.Utilities.Directions.DegreesDirection(i));
+			}
 		}
 
 		public override void onStart() {

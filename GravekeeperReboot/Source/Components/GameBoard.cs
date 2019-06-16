@@ -17,7 +17,7 @@ namespace GravekeeperReboot.Source {
 		TiledMapComponent mapComponent;
 		TiledTile exit;
 
-		List<Entity> tileEntities;
+		List<TileEntity> tileEntities;
 		List<TiledTile> graveStones;
 
 		public Vector2 Center => mapComponent.bounds.center;
@@ -32,7 +32,7 @@ namespace GravekeeperReboot.Source {
 
 			mapComponent = tileMapEntity.getComponent<TiledMapComponent>();
 
-			tileEntities = new List<Entity>();
+			tileEntities = new List<TileEntity>();
 			graveStones = new List<TiledTile>();
 		}
 
@@ -50,8 +50,9 @@ namespace GravekeeperReboot.Source {
 
 			foreach (TiledTile tile in spawnTiles) {
 				string type = tile.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE];
-				Entity e = Prefabs.prefabs[type].Instantiate(scene, Vector2.Zero);
-				e.getComponent<TileComponent>().Initialize(this, WorldToTilePosition(tile.getWorldPosition(mapComponent.tiledMap)));
+				Point tilePosition = new Point(tile.x, tile.y);
+				TileEntity e = Prefabs.prefabs[type].Instantiate(scene, tilePosition);
+				e.gameBoard = this;
 				tileEntities.Add(e);
 			}
 
@@ -62,29 +63,8 @@ namespace GravekeeperReboot.Source {
 			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
 		}
 
-		public bool CanPush(TileComponent tile, TileDirection direction) {
-			return EmptyAtLocation(tile.tilePosition + Directions.Offset(direction));
-		}
-
-		public bool CanRotate(TileComponent tile, TileComponent pivot, TileDirection direction) {
-			var offset = Directions.Offset(Directions.DirAdd(pivot.tileDirection, direction));
-
-			var targetPosition = EmptyAtLocation(pivot.tilePosition + offset);
-			var block = EmptyAtLocation(tile.tilePosition + offset);
-
-			return targetPosition && block;
-		}
-
-		public Vector2 TileToWorldPosition(Point tilePos) {
-			return mapComponent.tiledMap.tileToWorldPosition(tilePos) + new Vector2(8, 8);
-		}
-
-		public Point WorldToTilePosition(Vector2 worldPos) {
-			return mapComponent.tiledMap.worldToTilePosition(worldPos);
-		}
-
-		public Entity FindAtLocation(Point tilePos) {
-			return tileEntities.Find(e => e.getComponent<TileComponent>().tilePosition == tilePos);
+		public TileEntity FindAtLocation(Point tilePos) {
+			return tileEntities.Find(e => e.tilePosition == tilePos);
 		}
 
 		public bool EmptyAtLocation(Point tilePos) {

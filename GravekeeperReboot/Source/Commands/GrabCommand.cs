@@ -1,4 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
@@ -7,10 +8,10 @@ using System;
 
 namespace GravekeeperReboot.Source.Commands {
 	public class GrabCommand : Command {
-		private Entity grabber;
+		private TileEntity grabber;
 		private GrabComponent grabComponent;
 
-		public GrabCommand(Entity grabber) {
+		public GrabCommand(TileEntity grabber) {
 			if (!grabber.HasComponent<GrabComponent>())
 				throw new ArgumentException("Grabber does not have a GrabComponent attached!");
 
@@ -19,13 +20,12 @@ namespace GravekeeperReboot.Source.Commands {
 		}
 
 		public override void Execute() {
-			GameBoard gameboard = grabber.scene.getSceneComponent<GameBoard>();
-			TileComponent tileComponent = grabber.getComponent<TileComponent>();
+			GameBoard gameboard = this.grabber.scene.getSceneComponent<GameBoard>();
 
-			Point checkPosition = tileComponent.tilePosition + Directions.Offset(tileComponent.tileDirection);
-			Entity checkedEntity = gameboard.FindAtLocation(checkPosition);
+			Point checkPosition = grabber.tilePosition + Directions.Offset(grabber.tileDirection);
+			TileEntity checkedEntity = gameboard.FindAtLocation(checkPosition);
 
-			if (checkedEntity != null && checkedEntity.HasComponent<ControlComponent>()) {
+			if (checkedEntity != null && checkedEntity.movability.HasFlag(TileEntity.MovabilityFlags.Grabbable)) {
 				grabComponent.isGrabbing = true;
 				grabComponent.target = checkedEntity;
 			}

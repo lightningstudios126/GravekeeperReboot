@@ -5,18 +5,17 @@ using Nez;
 using Nez.Sprites;
 
 namespace GravekeeperReboot.Source.Entities {
-	class Soul : Prefab{
+	public sealed class Soul : Prefab{
 		public override string Type => Tiled.TiledMapConstants.TYPE_SOUL;
 
-		public override Entity Instantiate(Scene scene, Vector2 position) {
-			Entity soul = scene.createEntity(Type, position);
-			soul.setTag((int)Tags.Soul);
+		protected override void Instantiate(TileEntity entity, Scene scene, Point position) {
+			entity.name = Type;
+			entity.setTag((int)Tags.Soul);
 
-			soul.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.soul)))
-				.addComponent(new TileComponent())
-				.addComponent(new ControlComponent(true, true));
+			entity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.soul)));
 
-			return soul;
+			entity.tilePosition = position;
+			entity.movability = TileEntity.MovabilityFlags.Grabbable | TileEntity.MovabilityFlags.Pushable | TileEntity.MovabilityFlags.Pivotable;
 		}
 	}
 }

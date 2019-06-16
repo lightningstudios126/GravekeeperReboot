@@ -1,4 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Nez;
@@ -6,30 +7,24 @@ using System;
 
 namespace GravekeeperReboot.Source.Commands {
 	class RotateCommand : Command {
-		private Entity entity;
+		private TileEntity entity;
 		private readonly TileDirection initialDirection;
 		private readonly TileDirection finalDirection;
 
-		private TileComponent entityTile;
-
-		public RotateCommand(Entity entity, TileDirection offset) {
-			if(!entity.HasComponent<TileComponent>())
-				throw new System.ArgumentException("Target does not have a TileComponent attached!");
-
+		public RotateCommand(TileEntity entity, TileDirection offset) {
 			this.entity = entity;
-			entityTile = entity.getComponent<TileComponent>();
 
-			this.initialDirection = entityTile.tileDirection;
-			this.finalDirection = Directions.DirAdd(entityTile.tileDirection, offset);
+			this.initialDirection = entity.tileDirection;
+			this.finalDirection = Directions.DirAdd(entity.tileDirection, offset);
 		}
 
 		public override void Execute() {
-			entityTile.tileDirection = finalDirection;
+			entity.tileDirection = finalDirection;
 			entity.addComponent<AnimationComponent>().animation = Animation;
 		}
 
 		public override void Undo() {
-			entityTile.tileDirection = initialDirection;
+			entity.tileDirection = initialDirection;
 			entity.rotationDegrees = Directions.DirectionDegrees(initialDirection);
 		}
 

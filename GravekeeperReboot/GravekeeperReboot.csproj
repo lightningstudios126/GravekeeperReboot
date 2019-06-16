@@ -60,12 +60,11 @@
     <Compile Include="Source\Commands\RotateCommand.cs" />
     <Compile Include="Source\Commands\TurnCommand.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
-    <Compile Include="Source\Components\ControlComponent.cs" />
     <Compile Include="Source\Components\GrabComponent.cs" />
     <Compile Include="Source\Components\GameBoard.cs" />
     <Compile Include="Source\Components\PlayerMoveComponent.cs" />
-    <Compile Include="Source\Components\TileComponent.cs" />
     <Compile Include="Source\Entities\Block.cs" />
+    <Compile Include="Source\Entities\TileEntity.cs" />
     <Compile Include="Source\Extensions\EntityExtensions.cs" />
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Prefab.cs" />

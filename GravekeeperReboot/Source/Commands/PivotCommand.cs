@@ -1,4 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using GravekeeperReboot.Source.Utilities;
 using Microsoft.Xna.Framework;
@@ -6,43 +7,37 @@ using Nez;
 
 namespace GravekeeperReboot.Source.Commands {
 	public class PivotCommand : Command {
-		private Entity entity;
+		private TileEntity entity;
 		private Point initialPosition;
 		private Point finalPosition;
 
-		private TileComponent entityTile;
-
-		public PivotCommand(Entity entity, Entity pivot, TileDirection offset) {
-			if (!entity.HasComponent<TileComponent>())
-				throw new System.ArgumentException("Target does not have a TileComponent attached!");
-
+		public PivotCommand(TileEntity entity, Point pivot, TileDirection direction) {
 			this.entity = entity;
-			entityTile = entity.getComponent<TileComponent>();
 
-			var pivotTile = pivot.getComponent<TileComponent>();
+			var pivotTile = pivot;
 
-			initialPosition = entityTile.tilePosition;
+			initialPosition = entity.tilePosition;
 
-			var pivotOffset = pivotTile.tilePosition - entityTile.tilePosition;
-			var pivotDirection = Directions.Offset(Directions.DirAdd(pivotTile.tileDirection, offset));
+			var pivotOffset = pivot - entity.tilePosition;
+			var pivotDirection = Directions.Offset(Directions.DirAdd(Directions.OffsetDirection(entity.tilePosition - pivot), direction));
 
 			finalPosition = initialPosition + pivotOffset + pivotDirection;
 		}
 
 		public override void Execute() {
-			entityTile.tilePosition = finalPosition;
+			entity.tilePosition = finalPosition;
 			entity.addComponent<AnimationComponent>().animation = Animation;
 		}
 
 		public override void Undo() {
-			entityTile.tilePosition = initialPosition;
+			entity.tilePosition = initialPosition;
 			entity.position -= (finalPosition - initialPosition).ToVector2() * 16;
 		}
 
 		private void Animation(float progress) {
 			GameBoard gameBoard = entity.scene.getSceneComponent<GameBoard>();
-			var initial = gameBoard.TileToWorldPosition(initialPosition);
-			var final = gameBoard.TileToWorldPosition(finalPosition);
+			var initial = Tiled.TiledMapConstants.TileToWorldPosition(initialPosition) + Tiled.TiledMapConstants.ENTITY_OFFSET;
+			var final = Tiled.TiledMapConstants.TileToWorldPosition(finalPosition) + Tiled.TiledMapConstants.ENTITY_OFFSET;
 
 			var offset = progress * (final - initial);
 

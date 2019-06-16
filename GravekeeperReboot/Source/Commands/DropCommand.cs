@@ -1,4 +1,5 @@
 ﻿using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Extensions;
 using Nez;
 using System;
@@ -9,9 +10,9 @@ namespace GravekeeperReboot.Source.Commands {
 		private Entity grabber;
 		private GrabComponent grabComponent;
 
-		private Entity heldEntity;
+		private TileEntity heldEntity;
 
-		public DropCommand(Entity grabber) {
+		public DropCommand(TileEntity grabber) {
 			if (!grabber.HasComponent<GrabComponent>())
 				throw new ArgumentException("Grabber does not have a GrabComponent attached!");
 

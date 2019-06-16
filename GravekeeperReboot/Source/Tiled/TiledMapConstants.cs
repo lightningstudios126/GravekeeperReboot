@@ -1,4 +1,6 @@
-﻿namespace GravekeeperReboot.Source.Tiled {
+﻿using Microsoft.Xna.Framework;
+
+namespace GravekeeperReboot.Source.Tiled {
 	static class TiledMapConstants {
 		// floor tiles
 		public const string LAYER_FLOOR = "Floor";
@@ -18,6 +20,15 @@
 		public const string TYPE_PLAYER = "Player";
 
 		// Dimensions of every tile
-		public const int TILESIZE = 16;
+		public const int TILE_SIZE = 16;
+		public static readonly Vector2 ENTITY_OFFSET = new Vector2(TILE_SIZE / 2);
+
+		public static Vector2 TileToWorldPosition(Point tilePos) {
+			return tilePos.ToVector2() * TILE_SIZE;
+		}
+
+		public static Point WorldToTilePosition(Vector2 worldPos) {
+			return (worldPos/TILE_SIZE).ToPoint();
+		}
 	}
 }

@@ -8,16 +8,16 @@ namespace GravekeeperReboot.Source.Entities {
     public sealed class Player : Prefab {
 		public override string Type => Tiled.TiledMapConstants.TYPE_PLAYER;
 
-		public override Entity Instantiate (Scene scene, Vector2 position) {
-			Entity player = scene.createEntity(Type, position);
-            player.setTag((int)Tags.Player);
+		protected override void Instantiate (TileEntity entity, Scene scene, Point position) {
+			entity.name = Type;
+            entity.setTag((int)Tags.Player);
 
-			player.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
-				.addComponent(new TileComponent())
+			entity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.player)))
 				.addComponent(new GrabComponent() { isGrabbing = false })
 				.addComponent(new PlayerMoveComponent());
 
-            return player;
+			entity.tilePosition = position;
+			entity.movability = 0;
         }
     }
 }

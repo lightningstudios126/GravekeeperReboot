@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 
 namespace GravekeeperReboot.Source.Utilities {
-	public class Directions {
+	public static class Directions {
 		/// <summary>
 		/// Returns a tile coordinate representing one tile in the specified direction
 		/// </summary>
@@ -19,6 +19,19 @@ namespace GravekeeperReboot.Source.Utilities {
 					return new Point(0, 1);
 				default: return new Point(0, 0);
 			}
+		}
+
+		/// <summary>
+		/// Converts an integer offset with a magnitude of 1 to a <see cref="TileDirection"/>.
+		/// </summary>
+		/// <param name="o">integer offset. Must have a magnitude of 1</param>
+		/// <returns>Returns a <see cref="TileDirection"/> that corresponds to the offset</returns>
+		public static TileDirection OffsetDirection(Point o) {
+			if (o == new Point(1, 0)) return TileDirection.RIGHT;
+			if (o == new Point(0, 1)) return TileDirection.DOWN;
+			if (o == new Point(-1, 0)) return TileDirection.LEFT;
+			if (o == new Point(0, -1)) return TileDirection.UP;
+			else throw new System.ArgumentOutOfRangeException("offset must have a magnitude of 1");
 		}
 
 		public static int DirectionDegrees(TileDirection direction) {
