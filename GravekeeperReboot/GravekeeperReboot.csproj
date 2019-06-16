@@ -58,7 +58,7 @@
     <Compile Include="Source\Commands\GrabCommand.cs" />
     <Compile Include="Source\Commands\PivotCommand.cs" />
     <Compile Include="Source\Commands\RotateCommand.cs" />
-    <Compile Include="Source\Commands\TurnCommand.cs" />
+    <Compile Include="Source\Commands\TickCommand.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
     <Compile Include="Source\Components\GrabComponent.cs" />
     <Compile Include="Source\Components\GameBoard.cs" />
