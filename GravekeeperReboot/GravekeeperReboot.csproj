@@ -85,6 +85,7 @@
     <Compile Include="Source\Tiled\TiledMapRebuilder.cs" />
     <Compile Include="Source\Utilities\Directions.cs" />
     <Compile Include="Source\Utilities\TileDirection.cs" />
+    <Compile Include="Source\Utilities\Tween.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
