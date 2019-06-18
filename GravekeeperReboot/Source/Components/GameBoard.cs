@@ -17,6 +17,7 @@ namespace GravekeeperReboot.Source {
 
 		List<TileEntity> tileEntities;
 		List<TiledTile> graveStones;
+		List<TiledTile> floorTiles;
 
 		public Vector2 Center => mapComponent.bounds.center;
 
@@ -54,7 +55,7 @@ namespace GravekeeperReboot.Source {
 				tileEntities.Add(e);
 			}
 
-			List<TiledTile> floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
+			floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
 			floorTiles.RemoveAll(t => t == null);
 
 			exit = floorTiles.Find(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_EXIT);
@@ -70,7 +71,7 @@ namespace GravekeeperReboot.Source {
 		}
 
 		public bool GroundAtLocation(Point tilePosition) {
-			return mapComponent.getTileAtWorldPosition(tilePosition.ToVector2()) != null;
+			return floorTiles.Exists(t => new Point(t.x, t.y) == tilePosition);
 		}
 	}
 }

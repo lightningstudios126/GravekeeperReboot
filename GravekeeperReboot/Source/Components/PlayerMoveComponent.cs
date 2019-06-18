@@ -25,7 +25,7 @@ namespace GravekeeperReboot.Source.Components {
 		public override void onAddedToEntity() {
 			base.onAddedToEntity();
 			playerGrab = entity.getComponent<GrabComponent>();
-			gameBoard = entity.scene.getSceneComponent<GameBoard>();
+			gameBoard = entity.gameBoard;
 			commandSystem = entity.scene.getEntityProcessor<CommandSystem>();
 		}
 
@@ -33,6 +33,8 @@ namespace GravekeeperReboot.Source.Components {
 			OnPlayerAction();
 
 			TileDirection direction = entity.tileDirection;
+			if (!gameBoard.GroundAtLocation(entity.tilePosition + direction.Offset())) return;
+
 			if (!playerGrab.isGrabbing) {
 				TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 
@@ -56,8 +58,9 @@ namespace GravekeeperReboot.Source.Components {
 			OnPlayerAction();
 
 			TileDirection direction = entity.tileDirection.Add(TileDirection.DOWN);
-			TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
+			if (!gameBoard.GroundAtLocation(entity.tilePosition + direction.Offset())) return;
 
+			TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 			if (entityAhead == null || entityAhead.CanPush(direction)) {
 				MoveEntity(entity, direction.Offset());
 
