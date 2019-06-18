@@ -96,6 +96,17 @@ namespace GravekeeperReboot.Source.Components {
 				// Rotate the player and pivot the entity it's grabbing
 				RotateEntity(entity, direction);
 				PivotEntity(playerGrab.target, entity.tilePosition, direction);
+
+				var offset = Directions.OffsetDirection(playerGrab.target.tilePosition - entity.tilePosition).Add(direction).Offset();
+
+				TileEntity targetEntity = gameBoard.FindAtLocation(entity.tilePosition + offset);
+				TileEntity blockEntity = gameBoard.FindAtLocation(playerGrab.target.tilePosition + offset);
+
+				if (targetEntity != null && targetEntity.CanPush(Directions.OffsetDirection(offset).Add(direction)))
+					MoveEntity(targetEntity, Directions.OffsetDirection(offset).Add(direction).Offset());
+
+				if (blockEntity != null && blockEntity.CanPush(Directions.OffsetDirection(offset)))
+					MoveEntity(blockEntity, Directions.OffsetDirection(offset).Offset());
 			}
 		}
 
