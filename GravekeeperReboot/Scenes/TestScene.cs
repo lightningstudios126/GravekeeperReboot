@@ -38,7 +38,6 @@ namespace GravekeeperReboot.Scenes {
 			input.OnPressUndo += command.UndoTurn;
 			playerMove.OnPlayerAction += command.StartNewTurn;
 			input.OnInput += move.InterruptAnimation;
-			
 		}
 
 		public override void update() {

@@ -43,10 +43,9 @@ namespace GravekeeperReboot.Source.Entities {
 		/// <returns>whether this entity can be pushed in that direction</returns>
 		public bool CanPush(TileDirection direction) {
 			if (!movability.HasFlag(MovabilityFlags.Pushable)) return false;
-			if (gameBoard != null) {
-				return gameBoard.EmptyAtLocation(tilePosition + direction.Offset());
-			}
-			return false;
+			if (gameBoard == null) return false;
+			
+			return gameBoard.EmptyAtLocation(tilePosition + direction.Offset());
 		}
 
 		/// <summary>
