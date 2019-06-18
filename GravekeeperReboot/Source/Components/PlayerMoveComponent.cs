@@ -39,17 +39,17 @@ namespace GravekeeperReboot.Source.Components {
 				TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 
 				if (entityAhead == null || entityAhead.CanPush(direction)) {
-					MoveEntity(entity, direction.Offset());
+					MoveEntity(entity, direction);
 
 					if (entityAhead != null)
-						MoveEntity(entityAhead, direction.Offset());
+						MoveEntity(entityAhead, direction);
 				}
 			} else {
 				TileEntity entityAhead = gameBoard.FindAtLocation(playerGrab.target.tilePosition + direction.Offset());
 				if (entityAhead == null || entityAhead.CanPush(direction)) {
-					MoveEntity(entity, direction.Offset());
-					MoveEntity(playerGrab.target, direction.Offset());
-					if (entityAhead != null) MoveEntity(entityAhead, direction.Offset());
+					MoveEntity(entity, direction);
+					MoveEntity(playerGrab.target, direction);
+					if (entityAhead != null) MoveEntity(entityAhead, direction);
 				}
 			}
 		}
@@ -62,10 +62,10 @@ namespace GravekeeperReboot.Source.Components {
 
 			TileEntity entityAhead = gameBoard.FindAtLocation(entity.tilePosition + direction.Offset());
 			if (entityAhead == null || entityAhead.CanPush(direction)) {
-				MoveEntity(entity, direction.Offset());
+				MoveEntity(entity, direction);
 
-				if (playerGrab.isGrabbing) MoveEntity(playerGrab.target, direction.Offset());
-				if (entityAhead != null) MoveEntity(entityAhead, direction.Offset());
+				if (playerGrab.isGrabbing) MoveEntity(playerGrab.target, direction);
+				if (entityAhead != null) MoveEntity(entityAhead, direction);
 			}
 		}
 
@@ -106,14 +106,14 @@ namespace GravekeeperReboot.Source.Components {
 				TileEntity blockEntity = gameBoard.FindAtLocation(playerGrab.target.tilePosition + offset);
 
 				if (targetEntity != null && targetEntity.CanPush(Directions.OffsetDirection(offset).Add(direction)))
-					MoveEntity(targetEntity, Directions.OffsetDirection(offset).Add(direction).Offset());
+					MoveEntity(targetEntity, Directions.OffsetDirection(offset).Add(direction));
 
 				if (blockEntity != null && blockEntity.CanPush(Directions.OffsetDirection(offset)))
-					MoveEntity(blockEntity, Directions.OffsetDirection(offset).Offset());
+					MoveEntity(blockEntity, Directions.OffsetDirection(offset));
 			}
 		}
 
-		private void MoveEntity(TileEntity entity, Point offset) {
+		private void MoveEntity(TileEntity entity, TileDirection offset) {
 			commandSystem.QueueCommand(new MoveCommand(entity, offset));
 		}
 

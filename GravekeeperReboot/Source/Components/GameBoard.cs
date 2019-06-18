@@ -51,8 +51,7 @@ namespace GravekeeperReboot.Source {
 				string type = tile.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE];
 				Point tilePosition = new Point(tile.x, tile.y);
 				TileEntity e = Prefabs.prefabs[type].Instantiate(scene, tilePosition);
-				e.gameBoard = this;
-				tileEntities.Add(e);
+				AddTileEntity(e);
 			}
 
 			floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
@@ -72,6 +71,12 @@ namespace GravekeeperReboot.Source {
 
 		public bool GroundAtLocation(Point tilePosition) {
 			return floorTiles.Exists(t => new Point(t.x, t.y) == tilePosition);
+		}
+
+		public TileEntity AddTileEntity(TileEntity e) {
+			e.gameBoard = this;
+			tileEntities.Add(e);
+			return e;
 		}
 	}
 }

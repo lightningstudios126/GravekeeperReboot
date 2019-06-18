@@ -1,6 +1,7 @@
 ﻿using GravekeeperReboot.Source;
 using GravekeeperReboot.Source.ActionMapping;
 using GravekeeperReboot.Source.Components;
+using GravekeeperReboot.Source.Entities;
 using GravekeeperReboot.Source.Systems;
 using GravekeeperReboot.Source.Tiled;
 using Nez;
@@ -34,6 +35,9 @@ namespace GravekeeperReboot.Scenes {
 			input.OnPressUndo += command.UndoTurn;
 			playerMove.OnPlayerAction += command.StartNewTurn;
 			input.OnInput += move.InterruptAnimation;
+			
+			TileEntity thing = gameBoard.AddTileEntity(Prefabs.prefabs["MovingEntityThing"].Instantiate(this, new Microsoft.Xna.Framework.Point(1, 0)));
+			playerMove.OnPlayerAction += () => { command.QueueCommand(new Source.Commands.MoveCommand(thing, Source.Utilities.TileDirection.RIGHT)); };
 		}
 
 		private void BindPlayerControls(InputSystem input, PlayerMoveComponent playerMove) {

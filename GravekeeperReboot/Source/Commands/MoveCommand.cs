@@ -1,5 +1,7 @@
 ﻿using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Entities;
+using GravekeeperReboot.Source.Utilities;
+using GravekeeperReboot.Source.Extensions;
 using Microsoft.Xna.Framework;
 
 namespace GravekeeperReboot.Source.Commands {
@@ -8,11 +10,11 @@ namespace GravekeeperReboot.Source.Commands {
 		private Point initialPosition;
 		private Point finalPosition;
 
-		public MoveCommand(TileEntity entity, Point offset) {
+		public MoveCommand(TileEntity entity, TileDirection offset) {
 			this.entity = entity;
 
 			initialPosition = entity.tilePosition;
-			finalPosition = entity.tilePosition + offset;
+			finalPosition = entity.tilePosition + offset.Offset();
 		}
 
 		public override void Execute() {

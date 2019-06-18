@@ -6,6 +6,7 @@ namespace GravekeeperReboot.Source.Entities {
 	/// </summary>
 	[Flags]
 	public enum MovabilityFlags {
+		None = 0,
 		Grabbable = 1 << 0,
 		Pushable = 1 << 1,
 		Pivotable = 1 << 2

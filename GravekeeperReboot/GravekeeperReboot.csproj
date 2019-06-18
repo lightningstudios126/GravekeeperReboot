@@ -65,7 +65,9 @@
     <Compile Include="Source\Components\PlayerMoveComponent.cs" />
     <Compile Include="Source\Entities\Block.cs" />
     <Compile Include="Source\Entities\MovabilityFlags.cs" />
+    <Compile Include="Source\Entities\MovingEntityThing.cs" />
     <Compile Include="Source\Entities\TileEntity.cs" />
+    <Compile Include="Source\Entities\Wall.cs" />
     <Compile Include="Source\Extensions\EntityExtensions.cs" />
     <Compile Include="Source\Entities\Player.cs" />
     <Compile Include="Source\Entities\Prefab.cs" />
