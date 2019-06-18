@@ -11,7 +11,7 @@ namespace GravekeeperReboot.Source.Entities {
 			entity.name = Type;
 			entity.setTag((int)Tags.Block);
 
-			entity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.movableWall)));
+			entity.addComponent(new Sprite(scene.content.Load<Texture2D>(Content.Sprites.Tiles.block)));
 
 			entity.tilePosition = position;
 			entity.movability = MovabilityFlags.Grabbable | MovabilityFlags.Pushable;

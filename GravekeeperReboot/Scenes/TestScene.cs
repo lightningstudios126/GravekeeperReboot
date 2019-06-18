@@ -8,6 +8,13 @@ using Nez;
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
 		GameBoard gameBoard;
+		int world = 1;
+		int level = 1;
+		public TestScene() { }
+		private TestScene(int world, int level) {
+			this.world = world;
+			this.level = level;
+		}
 
 		public override void initialize() {
 			base.initialize();
@@ -19,15 +26,11 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new InputSystem(new ArrowKeyBinding())); 
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(AnimationComponent))));
 			gameBoard = addSceneComponent(new GameBoard());
-
-			for(int i = 0; i < 360; i++) {
-				System.Console.WriteLine(i+ ":" + Source.Utilities.Directions.DegreesDirection(i));
-			}
 		}
 
 		public override void onStart() {
 			base.onStart();
-			gameBoard.LoadLevel(1, 1);
+			gameBoard.LoadLevel(world, level);
 			camera.setPosition(gameBoard.Center);
 			camera.zoomIn(10);
 			PlayerMoveComponent playerMove = findEntity(TiledMapConstants.TYPE_PLAYER).getComponent<PlayerMoveComponent>();
@@ -38,10 +41,6 @@ namespace GravekeeperReboot.Scenes {
 			input.OnPressUndo += command.UndoTurn;
 			playerMove.OnPlayerAction += command.StartNewTurn;
 			input.OnInput += move.InterruptAnimation;
-		}
-
-		public override void update() {
-			base.update();
 		}
 
 		private void BindPlayerControls(InputSystem input, PlayerMoveComponent playerMove) {
