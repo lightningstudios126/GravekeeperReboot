@@ -16,6 +16,8 @@ namespace GravekeeperReboot.Source.Entities {
 		/// </summary>
 		public TileDirection tileDirection;
 
+		public bool isBeingGrabbed;
+
 		/// <summary>
 		/// which movement operations this entity can undergo
 		/// </summary>
@@ -80,5 +82,7 @@ namespace GravekeeperReboot.Source.Entities {
 		public void UpdateWorldPosition() {
 			position = Tiled.TiledMapConstants.TileToWorldPosition(tilePosition);
 		}
+
+
 	}
 }

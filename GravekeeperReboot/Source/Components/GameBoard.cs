@@ -4,6 +4,7 @@ using GravekeeperReboot.Source.Tiled;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,8 @@ namespace GravekeeperReboot.Source {
 
 		List<TileEntity> tileEntities;
 		List<TiledTile> graveStones;
+
+		List<TiledTile> floorTiles;
 
 		public Vector2 Center => mapComponent.bounds.center;
 
@@ -54,11 +57,12 @@ namespace GravekeeperReboot.Source {
 				tileEntities.Add(e);
 			}
 
-			List<TiledTile> floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
+			floorTiles = mapComponent.tiledMap.getLayer<TiledTileLayer>(TiledMapConstants.LAYER_FLOOR).tiles.ToList();
 			floorTiles.RemoveAll(t => t == null);
 
 			exit = floorTiles.Find(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_EXIT);
-			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
+			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_EMPTY);
+			Console.WriteLine(graveStones.First().x + ", " + graveStones.First().y);
 		}
 
 		public TileEntity FindAtLocation(Point tilePos) {
@@ -70,7 +74,15 @@ namespace GravekeeperReboot.Source {
 		}
 
 		public bool GroundAtLocation(Point tilePosition) {
-			return mapComponent.getTileAtWorldPosition(tilePosition.ToVector2()) != null;
+			return floorTiles.Any(t => new Point(t.x, t.y) == tilePosition);
+		}
+
+		public bool ExitAtLocation(Point tilePosition) {
+			return exit.getWorldPosition(mapComponent.tiledMap).roundToPoint() == tilePosition;
+		}
+
+		public bool GravestoneAtLocation(Point tilePosition) {
+			return graveStones.Any(g => new Point(g.x, g.y) == tilePosition);
 		}
 	}
 }

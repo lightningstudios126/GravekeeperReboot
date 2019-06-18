@@ -23,12 +23,14 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Execute() {
 			grabComponent.isGrabbing = false;
+			grabComponent.target.isBeingGrabbed = false;
 			grabComponent.target = null;
 		}
 
 		public override void Undo() {
 			grabComponent.isGrabbing = true;
 			grabComponent.target = heldEntity;
+			grabComponent.target.isBeingGrabbed = true;
 		}
 	}
 }

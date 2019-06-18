@@ -17,7 +17,10 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Execute() {
 			entity.tilePosition = finalPosition;
-			entity.addComponent<AnimationComponent>().animation = Animation;
+
+			var animComponent = entity.addComponent<AnimationComponent>();
+			animComponent.animation = Animation;
+			animComponent.animationFinish= AnimationFinish;
 		}
 
 		public override void Undo() {
@@ -33,6 +36,10 @@ namespace GravekeeperReboot.Source.Commands {
 			var offset = progress * (final - initial);
 
 			entity.position = initial + offset;
+		}
+
+		private void AnimationFinish() {
+			
 		}
 	}
 }

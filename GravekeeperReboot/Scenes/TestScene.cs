@@ -4,6 +4,7 @@ using GravekeeperReboot.Source.Components;
 using GravekeeperReboot.Source.Systems;
 using GravekeeperReboot.Source.Tiled;
 using Nez;
+using Nez.Sprites;
 
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
@@ -18,6 +19,8 @@ namespace GravekeeperReboot.Scenes {
 			addEntityProcessor(new CommandSystem());
 			addEntityProcessor(new InputSystem(new ArrowKeyBinding())); 
 			addEntityProcessor(new MoveSystem(new Matcher().all(typeof(AnimationComponent))));
+			addEntityProcessor(new SoulSystem(new Matcher().all(typeof(Sprite))));
+
 			gameBoard = addSceneComponent(new GameBoard());
 		}
 
@@ -26,10 +29,12 @@ namespace GravekeeperReboot.Scenes {
 			gameBoard.LoadLevel(1, 1);
 			camera.setPosition(gameBoard.Center);
 			camera.zoomIn(10);
+
 			PlayerMoveComponent playerMove = findEntity(TiledMapConstants.TYPE_PLAYER).getComponent<PlayerMoveComponent>();
 			CommandSystem command = getEntityProcessor<CommandSystem>();
 			InputSystem input = getEntityProcessor<InputSystem>();
 			MoveSystem move = getEntityProcessor<MoveSystem>();
+
 			BindPlayerControls(input, playerMove);
 			input.OnPressUndo += command.UndoTurn;
 			playerMove.OnPlayerAction += command.StartNewTurn;

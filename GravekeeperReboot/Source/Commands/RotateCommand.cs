@@ -20,7 +20,9 @@ namespace GravekeeperReboot.Source.Commands {
 
 		public override void Execute() {
 			entity.tileDirection = finalDirection;
-			entity.addComponent<AnimationComponent>().animation = Animation;
+			var animComponent = entity.addComponent<AnimationComponent>();
+			animComponent.animation = Animation;
+			animComponent.animationFinish = () => { };
 		}
 
 		public override void Undo() {
