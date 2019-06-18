@@ -13,7 +13,6 @@ namespace GravekeeperReboot.Source.Systems {
 		bool IsAnimating => timePassed > 0;
 		bool interrupt = false;
 
-
 		public MoveSystem(Matcher matcher) : base(matcher) { }
 
 		protected override void process(List<Entity> entities) {

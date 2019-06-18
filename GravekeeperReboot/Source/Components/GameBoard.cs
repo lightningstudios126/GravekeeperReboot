@@ -4,6 +4,7 @@ using GravekeeperReboot.Source.Tiled;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tiled;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,7 +59,8 @@ namespace GravekeeperReboot.Source {
 			floorTiles.RemoveAll(t => t == null);
 
 			exit = floorTiles.Find(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_EXIT);
-			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_FULL);
+			graveStones = floorTiles.FindAll(t => t.tilesetTile.properties[TiledMapConstants.PROPERTY_TYPE] == TiledMapConstants.TYPE_GRAVESTONE_EMPTY);
+			Console.WriteLine(graveStones.First().x + ", " + graveStones.First().y);
 		}
 
 		public TileEntity FindAtLocation(Point tilePos) {
@@ -77,6 +79,14 @@ namespace GravekeeperReboot.Source {
 			e.gameBoard = this;
 			tileEntities.Add(e);
 			return e;
+		}
+
+		public bool ExitAtLocation(Point tilePosition) {
+			return exit.getWorldPosition(mapComponent.tiledMap).roundToPoint() == tilePosition;
+		}
+
+		public bool GravestoneAtLocation(Point tilePosition) {
+			return graveStones.Any(g => new Point(g.x, g.y) == tilePosition);
 		}
 	}
 }

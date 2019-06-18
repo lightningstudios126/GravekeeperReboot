@@ -54,6 +54,7 @@
     <Compile Include="Source\ActionMapping\ArrowKeyBinding.cs" />
     <Compile Include="Source\ActionMapping\CustomKeyBinding.cs" />
     <Compile Include="Source\ActionMapping\WASDKeyBinding.cs" />
+    <Compile Include="Source\Commands\BuryCommand.cs" />
     <Compile Include="Source\Commands\DropCommand.cs" />
     <Compile Include="Source\Commands\GrabCommand.cs" />
     <Compile Include="Source\Commands\PivotCommand.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Source\Systems\CommandSystem.cs" />
     <Compile Include="Source\Systems\InputSystem.cs" />
     <Compile Include="Source\Systems\MoveSystem.cs" />
+    <Compile Include="Source\Systems\SoulSystem.cs" />
     <Compile Include="Source\Tiled\TiledMapConstants.cs" />
     <Compile Include="Source\Tiled\TiledMapRebuilder.cs" />
     <Compile Include="Source\Utilities\Directions.cs" />

@@ -26,11 +26,13 @@ namespace GravekeeperReboot.Source.Commands {
 			if (checkedEntity != null && checkedEntity.movability.HasFlag(MovabilityFlags.Grabbable)) {
 				grabComponent.isGrabbing = true;
 				grabComponent.target = checkedEntity;
+				grabComponent.target.isBeingGrabbed = true;
 			}
 		}
 
 		public override void Undo() {
 			grabComponent.isGrabbing = false;
+			grabComponent.target.isBeingGrabbed = false;
 			grabComponent.target = null;
 		}
 	}
