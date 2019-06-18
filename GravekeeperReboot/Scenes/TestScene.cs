@@ -8,13 +8,6 @@ using Nez;
 namespace GravekeeperReboot.Scenes {
 	class TestScene : Scene {
 		GameBoard gameBoard;
-		int world = 1;
-		int level = 1;
-		public TestScene() { }
-		private TestScene(int world, int level) {
-			this.world = world;
-			this.level = level;
-		}
 
 		public override void initialize() {
 			base.initialize();
@@ -30,7 +23,7 @@ namespace GravekeeperReboot.Scenes {
 
 		public override void onStart() {
 			base.onStart();
-			gameBoard.LoadLevel(world, level);
+			gameBoard.LoadLevel(1, 1);
 			camera.setPosition(gameBoard.Center);
 			camera.zoomIn(10);
 			PlayerMoveComponent playerMove = findEntity(TiledMapConstants.TYPE_PLAYER).getComponent<PlayerMoveComponent>();
