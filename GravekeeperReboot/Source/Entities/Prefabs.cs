@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
 namespace GravekeeperReboot.Source.Entities {
-	class Prefabs {
+	static class Prefabs {
 		public static readonly Prefab Player = new Player();
 		public static readonly Prefab Soul = new Soul();
-		public static readonly Prefab Block  = new Block();
+		public static readonly Prefab Block = new Block();
 		// Wall
 		// Gravestone
 

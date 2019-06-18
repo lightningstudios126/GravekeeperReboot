@@ -18,7 +18,6 @@ namespace GravekeeperReboot.Source {
 
 		List<TileEntity> tileEntities;
 		List<TiledTile> graveStones;
-
 		List<TiledTile> floorTiles;
 
 		public Vector2 Center => mapComponent.bounds.center;
@@ -74,7 +73,7 @@ namespace GravekeeperReboot.Source {
 		}
 
 		public bool GroundAtLocation(Point tilePosition) {
-			return floorTiles.Any(t => new Point(t.x, t.y) == tilePosition);
+			return floorTiles.Exists(t => new Point(t.x, t.y) == tilePosition);
 		}
 
 		public bool ExitAtLocation(Point tilePosition) {
