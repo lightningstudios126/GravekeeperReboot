@@ -16,10 +16,6 @@ namespace GravekeeperReboot.Source.Utilities {
 			else throw new System.ArgumentOutOfRangeException("offset must have a magnitude of 1");
 		}
 
-		internal static object DirAdd(object p) {
-			throw new NotImplementedException();
-		}
-
 		/// <summary>
 		/// Turns rotation into a <see cref="TileDirection">
 		/// </summary>

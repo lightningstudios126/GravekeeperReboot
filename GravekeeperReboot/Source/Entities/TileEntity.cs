@@ -65,11 +65,16 @@ namespace GravekeeperReboot.Source.Entities {
 
 			var offset = Directions.OffsetDirection(tilePosition-pivot).Add(direction).Offset();
 
-			// Check that a 1x2 area is free in the direction of the pivot
-			bool targetPosition = gameBoard.EmptyAtLocation(pivot + offset);
-			bool block = gameBoard.EmptyAtLocation(tilePosition + offset);
+			TileEntity targetEntity = gameBoard.FindAtLocation(pivot + offset);
+			TileEntity blockEntity = gameBoard.FindAtLocation(tilePosition + offset);
 
-			return targetPosition && block;
+			var target = targetEntity == null || 
+				(targetEntity != null && targetEntity.CanPush(Directions.OffsetDirection(offset).Add(direction)));
+
+			var block = blockEntity == null || 
+				(blockEntity != null && blockEntity.CanPush(Directions.OffsetDirection(offset)));
+
+			return target && block;
 		}
 
 		public void UpdateWorldPosition() {
